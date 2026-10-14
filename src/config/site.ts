@@ -95,7 +95,7 @@ export const site = {
 
   nav: [
     { href: "#menu", label: "Меню" },
-    { href: "#about", label: "Почему к нам" },
+    { href: "#about", label: "Почему мы" },
     { href: "#gallery", label: "Фото" },
     { href: "#contacts", label: "Контакты" },
   ],

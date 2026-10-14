@@ -334,7 +334,7 @@ dialog::backdrop {
   }
 }
 
-/* Иконки в карточках «Почему к нам» дорисовываются, пока карточка въезжает в экран. */
+/* Иконки в карточках «Почему мы» дорисовываются, пока карточка въезжает в экран. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .draw {
