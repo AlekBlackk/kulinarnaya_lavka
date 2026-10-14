@@ -7,6 +7,8 @@ import { FoodImage } from "./FoodImage";
 import { ChevronIcon, CloseIcon, ExternalIcon, ZoomIcon } from "./icons";
 
 const ALL = "Все";
+// Наклоны полароидов: чередуются, чтобы фото лежали «вразброс», как на столе.
+const poses = ["rotate-[-2.5deg]", "rotate-[1.8deg]", "rotate-[-1deg]", "rotate-[2.4deg]", "rotate-[-1.8deg]", "rotate-[1.2deg]"];
 const groups = [ALL, ...new Set(galleryPhotos.map((photo) => photo.group))];
 
 export function Gallery() {
@@ -56,9 +58,6 @@ export function Gallery() {
               </span>
             </h2>
           </div>
-          <p className="max-w-md text-muted">
-            Фото блюд — иллюстрации того, что обычно бывает на обед. Нажмите на снимок, чтобы рассмотреть.
-          </p>
         </div>
 
         <div className="no-scrollbar -mx-4 mt-8 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
@@ -79,57 +78,53 @@ export function Gallery() {
           ))}
         </div>
 
-        <ul key={filter} className="mt-6 grid grid-flow-dense grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
+        <ul key={filter} className="mt-8 grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-10">
           {visible.map((item, index) => (
-            <li
-              key={item.src}
-              className={`pop ${item.wide ? "col-span-2" : ""}`}
-              style={{ "--i": index } as React.CSSProperties}
-            >
+            <li key={item.src} className="pop" style={{ "--i": index } as React.CSSProperties}>
+              {/* Фото-«полароид»: рамка, подпись от руки, наклон; при наведении выпрямляется и приподнимается. */}
               <button
                 type="button"
                 onClick={() => setCurrent(index)}
-                className="group relative block aspect-square w-full cursor-zoom-in overflow-hidden rounded-2xl bg-cream sm:rounded-3xl data-[wide=true]:aspect-[2/1] lg:data-[wide=true]:aspect-auto lg:data-[wide=true]:h-full"
-                data-wide={item.wide ?? false}
+                className={`group relative block w-full cursor-zoom-in bg-white p-2.5 pb-4 shadow-[0_14px_24px_-14px_rgb(47_33_27/0.55)] transition-[rotate,translate,scale,box-shadow] duration-300 hover:z-10 hover:-translate-y-1.5 hover:rotate-0 hover:scale-[1.04] hover:shadow-[0_24px_34px_-16px_rgb(47_33_27/0.6)] sm:p-3 sm:pb-5 ${poses[index % poses.length]}`}
                 aria-label={`Открыть фото: ${item.alt}`}
               >
-                {/* Фото чуть «плывёт» внутри рамки при прокрутке страницы (parallax, см. globals.css). */}
-                <div className="parallax absolute -inset-y-[7%] inset-x-0">
+                <span aria-hidden="true" className="absolute -top-2.5 left-1/2 z-10 h-5 w-14 -translate-x-1/2 -rotate-2 bg-cream-deep/90 shadow-sm" />
+                {/* Фото «проявляется»: из блёклого и размытого в чёткое, пока снимок въезжает в экран (см. globals.css). */}
+                <span className="develop relative block aspect-square overflow-hidden bg-cream">
                   <FoodImage
                     src={item.src}
                     alt={item.alt}
-                    sizes={item.wide ? "(min-width: 1024px) 720px, 100vw" : "(min-width: 1024px) 360px, 50vw"}
-                    className="transition-transform duration-500 group-hover:scale-105"
+                    sizes="(min-width: 1024px) 340px, (min-width: 640px) 30vw, 50vw"
                   />
-                </div>
-                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-coffee/75 to-transparent p-3 pt-10 text-left text-sm font-semibold text-milk sm:p-4 sm:pt-12">
-                  {item.group}
+                  <span
+                    aria-hidden="true"
+                    className="absolute right-2 top-2 flex size-9 scale-75 items-center justify-center rounded-full bg-milk/95 text-coffee opacity-0 shadow transition duration-300 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100"
+                  >
+                    <ZoomIcon width={18} height={18} />
+                  </span>
                 </span>
-                <span
-                  aria-hidden="true"
-                  className="absolute right-3 top-3 flex size-10 scale-75 items-center justify-center rounded-full bg-milk/95 text-coffee opacity-0 shadow transition duration-300 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100"
-                >
-                  <ZoomIcon />
+                <span className="mt-3 block text-center font-hand text-2xl leading-none text-coffee-soft sm:text-[1.7rem]">
+                  {item.caption}
                 </span>
               </button>
             </li>
           ))}
 
           {filter === ALL && (
-            <li className="pop col-span-2" style={{ "--i": visible.length } as React.CSSProperties}>
+            <li className="pop col-span-2 sm:col-span-1" style={{ "--i": visible.length } as React.CSSProperties}>
               <a
                 href={site.links.yandexPhotos}
                 target="_blank"
                 rel="noopener"
-                className="group flex h-full min-h-48 flex-col justify-between gap-6 rounded-2xl border-2 border-dashed border-line bg-cream/60 p-6 transition hover:border-terracotta-soft hover:bg-cream sm:rounded-3xl sm:p-8"
+                className="group flex h-full min-h-48 rotate-1 flex-col justify-between gap-6 border-2 border-dashed border-line bg-cream/60 p-5 transition hover:rotate-0 hover:border-terracotta-soft hover:bg-cream sm:p-6"
               >
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-wider text-olive">Интерьер кафе</p>
-                  <p className="mt-2 max-w-md font-display text-2xl font-semibold leading-snug">
-                    Как выглядит зал и вход — в настоящих фото гостей на Яндекс Картах
+                  <p className="mt-2 font-display text-xl font-semibold leading-snug">
+                    Зал и вход — на настоящих фото гостей на Яндекс Картах
                   </p>
                 </div>
-                <span className="inline-flex items-center gap-2 font-semibold text-terracotta">
+                <span className="inline-flex min-h-11 items-center gap-2 font-semibold text-terracotta">
                   Смотреть фото кафе
                   <ExternalIcon width={18} height={18} className="transition-transform group-hover:translate-x-0.5" />
                 </span>

@@ -316,26 +316,6 @@ dialog::backdrop {
   }
 }
 
-/* Parallax в галерее: рамка «обрезает» фото, а оно медленно смещается, пока плитка проходит через экран. */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .parallax {
-      animation: parallax linear both;
-      animation-timeline: view();
-      animation-range: cover;
-    }
-  }
-}
-
-@keyframes parallax {
-  from {
-    transform: translateY(-5%);
-  }
-  to {
-    transform: translateY(5%);
-  }
-}
-
 /* Чек в «Где нас найти»: зубчатый нижний край и штрихкод-декор. */
 .receipt {
   mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 18px 100%;
@@ -469,5 +449,23 @@ dialog::backdrop {
     opacity: 0;
     translate: 0 -56px;
     scale: 1.1;
+  }
+}
+
+/* «Проявка» фото в галерее: из блёклого и размытого в чёткое, пока снимок въезжает в экран. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .develop img {
+      animation: develop linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 80%;
+    }
+  }
+}
+
+@keyframes develop {
+  from {
+    filter: sepia(1) saturate(0.5) brightness(1.4) blur(6px);
+    scale: 1.08;
   }
 }

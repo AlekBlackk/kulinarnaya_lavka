@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { menuCategories, menuItems, type MenuCategoryId, type MenuItem } from "@/data/menu";
 import { site } from "@/config/site";
 import { DishDialog } from "./DishDialog";
-import { DiceIcon, GridIcon, ListIcon } from "./icons";
+import { GridIcon, ListIcon } from "./icons";
 import { MenuCategories } from "./MenuCategories";
 import { MenuGrid } from "./MenuGrid";
 import { MenuList } from "./MenuList";
@@ -27,14 +27,6 @@ export function Menu() {
     if (grid && grid.getBoundingClientRect().top < 0) {
       grid.scrollIntoView({ block: "start" });
     }
-  };
-
-  // «Выбрать за меня»: случайное блюдо из всего меню, не повторяя только что показанное.
-  const pickRandom = () => {
-    const pool = menuItems.filter((item) => item.id !== selected?.id);
-    const item = pool[Math.floor(Math.random() * pool.length)];
-    setActive(item.category);
-    setSelected(item);
   };
 
   const shown = menuItems.filter((item) => item.category === active);
@@ -79,16 +71,7 @@ export function Menu() {
           <MenuCategories options={categories} active={active} onChange={select} />
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-          <button
-            type="button"
-            onClick={pickRandom}
-            className="group inline-flex h-11 items-center gap-2 rounded-full bg-terracotta px-5 text-[15px] font-bold text-white transition hover:bg-coffee active:scale-[0.97]"
-          >
-            <DiceIcon className="transition-transform duration-500 group-hover:rotate-[360deg]" />
-            Не знаю, что взять
-          </button>
-
+        <div className="mt-4 flex justify-end">
           <div role="group" aria-label="Вид меню" className="flex rounded-full border border-line bg-white/60 p-1">
             {(
               [

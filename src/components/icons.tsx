@@ -96,13 +96,6 @@ export const ZoomIcon = (p: P) => (
   </Icon>
 );
 
-export const DiceIcon = (p: P) => (
-  <Icon {...p}>
-    <rect x="4" y="4" width="16" height="16" rx="3.5" />
-    <path d="M8.5 8.5h.01M15.5 8.5h.01M12 12h.01M8.5 15.5h.01M15.5 15.5h.01" strokeWidth="2.6" />
-  </Icon>
-);
-
 export const GridIcon = (p: P) => (
   <Icon {...p}>
     <rect x="4" y="4" width="6.5" height="6.5" rx="1.5" />
