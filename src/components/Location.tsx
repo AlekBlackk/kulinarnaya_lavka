@@ -1,102 +1,165 @@
 import { site } from "@/config/site";
-import { ClockIcon, ExternalIcon, PhoneIcon, PinIcon, RouteIcon } from "./icons";
+import { CopyButton } from "./CopyButton";
+import { ExternalIcon, PhoneIcon, RouteIcon } from "./icons";
+import { WeekStrip } from "./WeekStrip";
+
+// Одна строка «чека»: подпись, пунктирный выравниватель и значение.
+function Row({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="flex items-baseline gap-3">
+      <dt className="shrink-0 font-mono text-xs font-bold uppercase tracking-wider text-muted">{label}</dt>
+      <span aria-hidden="true" className="min-w-4 flex-1 border-b-2 border-dotted border-coffee/25" />
+      <dd className="text-right font-semibold">{children}</dd>
+    </div>
+  );
+}
 
 export function Location() {
   return (
     <section id="contacts" aria-labelledby="contacts-title" className="scroll-mt-16 bg-cream/60 py-16 sm:py-24">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10">
-        <div className="reveal">
-          <p className="font-hand text-2xl text-terracotta">заходите на обед</p>
-          <h2 id="contacts-title" className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
-            Где нас найти
-          </h2>
+      <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+        <div>
+          <div className="reveal">
+            <p className="font-hand text-2xl text-terracotta">заходите на обед</p>
+            <h2 id="contacts-title" className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
+              Где{" "}
+              <span className="relative inline-block text-terracotta">
+                <em className="font-semibold">нас найти</em>
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 200 12"
+                  preserveAspectRatio="none"
+                  className="absolute -bottom-4.5 left-0 h-2.5 w-full overflow-visible text-terracotta-soft"
+                >
+                  <path
+                    className="scribble scribble-view"
+                    pathLength="1"
+                    d="M2 7C40 2 70 11 105 6S170 3 198 7"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+            </h2>
+          </div>
 
-          <div className="mt-8 rounded-3xl border border-line bg-milk p-6 sm:p-8">
-            <p className="font-display text-2xl font-semibold">{site.name}</p>
+          {/* Контакты оформлены как кассовый чек: «печатается» при прокрутке, снизу зубчатый край. */}
+          <div className="mt-8 drop-shadow-[0_18px_24px_rgb(47_33_27/0.18)]">
+            <div className="receipt print rounded-t-2xl bg-white px-6 pb-10 pt-7 text-coffee sm:px-8">
+              <p className="text-center font-display text-2xl font-bold">{site.name}</p>
+              <p className="mt-1 text-center font-mono text-xs uppercase tracking-[0.2em] text-muted">
+                чек гостя · {site.address.city}
+              </p>
 
-            <dl className="mt-6 space-y-5">
-              <div className="flex gap-4">
-                <dt className="mt-0.5 text-terracotta">
-                  <PinIcon />
-                  <span className="sr-only">Адрес</span>
-                </dt>
-                <dd>
-                  {site.address.city}, {site.address.street}
-                  <span className="block text-muted">{site.address.details}</span>
-                </dd>
-              </div>
-              <div className="flex gap-4">
-                <dt className="mt-0.5 text-terracotta">
-                  <PhoneIcon />
-                  <span className="sr-only">Телефон</span>
-                </dt>
-                <dd>
+              <div className="my-5 border-t-2 border-dashed border-coffee/20" />
+
+              <dl className="space-y-4">
+                <Row label="Адрес">
+                  {site.address.street}
+                  <span className="block text-sm font-normal text-muted">{site.address.details}</span>
+                  <CopyButton text={`${site.address.city}, ${site.address.street}`} label="Скопировать адрес" />
+                </Row>
+                <Row label="Телефон">
                   <a href={site.phone.href} className="text-lg font-bold hover:text-terracotta">
                     {site.phone.display}
                   </a>
-                </dd>
-              </div>
-              <div className="flex gap-4">
-                <dt className="mt-0.5 text-terracotta">
-                  <ClockIcon />
-                  <span className="sr-only">Часы работы</span>
-                </dt>
-                <dd className="flex-1">
-                  <ul className="max-w-xs space-y-1">
-                    {site.hours.display.map((h) => (
-                      <li key={h.days} className="flex justify-between gap-6">
-                        <span>{h.days}</span>
-                        <span className="font-semibold">{h.time}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  {!site.hours.confirmed && (
-                    <p className="mt-2 text-sm text-muted">
-                      По данным Яндекс Карт. Перед визитом лучше уточнить по телефону.
-                    </p>
-                  )}
-                </dd>
-              </div>
-            </dl>
+                </Row>
+                <Row label="Часы">
+                  {site.hours.display.map((h) => (
+                    <span key={h.days} className="block">
+                      {h.days} <span className="font-bold">{h.time}</span>
+                    </span>
+                  ))}
+                </Row>
+              </dl>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:flex-col">
+              <div className="mt-5">
+                <WeekStrip />
+                {!site.hours.confirmed && (
+                  <p className="mt-3 text-sm text-muted">
+                    По данным Яндекс Карт. Перед визитом лучше уточнить по телефону.
+                  </p>
+                )}
+              </div>
+
+              <div className="my-5 border-t-2 border-dashed border-coffee/20" />
+
+              <dl>
+                <Row label="Средний чек">
+                  <span className="font-display text-xl font-bold text-terracotta">{site.averageCheck}</span>
+                </Row>
+              </dl>
+
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={site.links.route}
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex h-13 flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-terracotta px-6 font-bold text-white transition hover:bg-coffee active:scale-[0.98]"
+                >
+                  <RouteIcon />
+                  Построить маршрут
+                </a>
+                <a
+                  href={site.phone.href}
+                  className="inline-flex h-13 flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-full border-2 border-coffee/15 px-6 font-bold transition hover:border-coffee hover:bg-cream active:scale-[0.98]"
+                >
+                  <PhoneIcon />
+                  Позвонить
+                </a>
+              </div>
+
+              <ul className="mt-3 flex flex-wrap gap-2" aria-label="Маршрут по способу передвижения">
+                {site.links.routeModes.map((mode) => (
+                  <li key={mode.label}>
+                    <a
+                      href={mode.href}
+                      target="_blank"
+                      rel="noopener"
+                      className="inline-flex min-h-11 items-center rounded-full bg-cream px-4 text-sm font-semibold text-coffee-soft transition hover:bg-cream-deep"
+                    >
+                      {mode.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+
               <a
-                href={site.links.route}
+                href={site.links.yandexOrg}
                 target="_blank"
                 rel="noopener"
-                className="inline-flex h-13 flex-1 items-center whitespace-nowrap justify-center gap-2 rounded-full bg-terracotta px-6 font-bold text-white transition hover:bg-coffee active:scale-[0.98]"
+                className="mt-4 inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-olive underline-offset-4 hover:underline"
               >
-                <RouteIcon />
-                Построить маршрут
+                Карточка кафе на Яндекс Картах
+                <ExternalIcon width={16} height={16} />
               </a>
-              <a
-                href={site.phone.href}
-                className="inline-flex h-13 flex-1 items-center whitespace-nowrap justify-center gap-2 rounded-full border-2 border-coffee/15 px-6 font-bold transition hover:border-coffee hover:bg-cream active:scale-[0.98]"
-              >
-                <PhoneIcon />
-                Позвонить
-              </a>
+
+              <div aria-hidden="true" className="barcode mt-4 h-12" />
+              <p className="mt-3 text-center font-hand text-2xl text-terracotta">Спасибо, что заглянули!</p>
             </div>
-            <a
-              href={site.links.yandexOrg}
-              target="_blank"
-              rel="noopener"
-              className="mt-5 inline-flex items-center gap-2 text-[15px] font-semibold text-olive underline-offset-4 hover:underline"
-            >
-              Карточка кафе на Яндекс Картах
-              <ExternalIcon width={16} height={16} />
-            </a>
           </div>
         </div>
 
-        <div className="reveal relative min-h-[360px] overflow-hidden rounded-3xl border border-line bg-cream lg:min-h-full">
-          <iframe
-            src={site.links.mapWidget}
-            title={`${site.name} на карте: ${site.address.city}, ${site.address.street}`}
-            loading="lazy"
-            className="absolute inset-0 size-full border-0"
-            allowFullScreen
-          />
+        {/* Карта в рамке-открытке: чуть наклонена, «приклеена» скотчем. */}
+        <div className="reveal relative lg:pt-16">
+          <div className="relative h-full min-h-[380px] rotate-1 rounded-3xl bg-white p-3 shadow-[0_24px_40px_-24px_rgb(47_33_27/0.5)]">
+            <span aria-hidden="true" className="absolute -top-3 left-1/2 z-10 h-6 w-24 -translate-x-1/2 -rotate-2 bg-cream-deep/90 shadow-sm" />
+            <iframe
+              src={site.links.mapWidget}
+              title={`${site.name} на карте: ${site.address.city}, ${site.address.street}`}
+              loading="lazy"
+              className="size-full min-h-[356px] rounded-2xl border-0"
+              allowFullScreen
+            />
+            <p
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-5 left-6 -rotate-3 rounded-full bg-terracotta px-4 py-1.5 font-hand text-2xl text-white shadow-lg"
+            >
+              мы здесь!
+            </p>
+          </div>
         </div>
       </div>
     </section>

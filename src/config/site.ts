@@ -37,6 +37,9 @@ export const site = {
       { days: "Сб–Вс", time: "выходной" },
     ],
     schemaOrg: ["Mo-Fr 10:00-16:00"],
+    // Рабочие дни для полоски недели в «Где нас найти»: 0 = понедельник. Держать в согласии с display.
+    openDays: [0, 1, 2, 3, 4],
+    timeZone: "Europe/Moscow", // Тамбов живёт по московскому времени
   },
 
   // Фото первого экрана и превью ссылки в соцсетях. Замените на собственное фото, когда оно появится.
@@ -54,6 +57,11 @@ export const site = {
     yandexPhotos: `https://yandex.ru/maps/org/kulinarnaya_lavka_bistro/${yandexOrgId}/gallery/`,
     // На телефоне откроет приложение Яндекс Карт/Навигатора, если оно установлено.
     route: `https://yandex.ru/maps/?rtext=~${coordinates.lat}%2C${coordinates.lon}&rtt=auto`,
+    routeModes: [
+      { label: "На машине", href: `https://yandex.ru/maps/?rtext=~${coordinates.lat}%2C${coordinates.lon}&rtt=auto` },
+      { label: "Пешком", href: `https://yandex.ru/maps/?rtext=~${coordinates.lat}%2C${coordinates.lon}&rtt=pd` },
+      { label: "На транспорте", href: `https://yandex.ru/maps/?rtext=~${coordinates.lat}%2C${coordinates.lon}&rtt=mt` },
+    ],
     mapWidget: `https://yandex.ru/map-widget/v1/?ll=${coordinates.lon}%2C${coordinates.lat}&mode=search&oid=${yandexOrgId}&ol=biz&z=16`,
   },
 

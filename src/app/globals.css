@@ -335,3 +335,43 @@ dialog::backdrop {
     transform: translateY(5%);
   }
 }
+
+/* Чек в «Где нас найти»: зубчатый нижний край и штрихкод-декор. */
+.receipt {
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 18px 100%;
+}
+
+.barcode {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-coffee) 0 2px,
+    transparent 2px 5px,
+    var(--color-coffee) 5px 6px,
+    transparent 6px 9px,
+    var(--color-coffee) 9px 12px,
+    transparent 12px 14px,
+    var(--color-coffee) 14px 15px,
+    transparent 15px 19px
+  );
+  opacity: 0.8;
+}
+
+/* Чек «печатается» сверху вниз, когда въезжает в экран. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .print {
+      animation: print linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+  }
+}
+
+@keyframes print {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}

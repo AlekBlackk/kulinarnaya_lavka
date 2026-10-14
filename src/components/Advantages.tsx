@@ -55,7 +55,7 @@ export function Advantages() {
                 aria-hidden="true"
                 viewBox="0 0 200 12"
                 preserveAspectRatio="none"
-                className="absolute -bottom-1 left-0 h-2.5 w-full overflow-visible text-milk/70"
+                className="absolute -bottom-4.5 left-0 h-2.5 w-full overflow-visible text-milk/70"
               >
                 <path
                   className="scribble scribble-view"
