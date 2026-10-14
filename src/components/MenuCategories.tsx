@@ -46,7 +46,7 @@ export function MenuCategories({ options, active, onChange }: Props) {
       {pill && (
         <span
           aria-hidden="true"
-          className="absolute top-1 h-11 rounded-full bg-coffee shadow-[0_8px_18px_-8px_var(--color-coffee)] transition-[left,width] duration-300 ease-[cubic-bezier(0.34,1.3,0.64,1)] motion-reduce:transition-none"
+          className="absolute top-1 h-11 rounded-full bg-coffee shadow-[0_5px_9px_-6px_rgb(47_33_27/0.4)] transition-[left,width] duration-300 ease-[cubic-bezier(0.34,1.3,0.64,1)] motion-reduce:transition-none"
           style={{ left: pill.left, width: pill.width }}
         />
       )}

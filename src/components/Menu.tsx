@@ -4,8 +4,10 @@ import { useRef, useState } from "react";
 import { menuCategories, menuItems, type MenuCategoryId, type MenuItem } from "@/data/menu";
 import { site } from "@/config/site";
 import { DishDialog } from "./DishDialog";
+import { DiceIcon, GridIcon, ListIcon } from "./icons";
 import { MenuCategories } from "./MenuCategories";
 import { MenuGrid } from "./MenuGrid";
+import { MenuList } from "./MenuList";
 
 // Используются только категории, в которых есть блюда, — пустых вкладок не будет.
 const categories = menuCategories
@@ -15,6 +17,7 @@ const categories = menuCategories
 export function Menu() {
   const [active, setActive] = useState<MenuCategoryId>(categories[0].id);
   const [selected, setSelected] = useState<MenuItem | null>(null);
+  const [view, setView] = useState<"cards" | "list">("cards");
   const gridRef = useRef<HTMLDivElement>(null);
 
   const select = (id: string) => {
@@ -25,6 +28,16 @@ export function Menu() {
       grid.scrollIntoView({ block: "start" });
     }
   };
+
+  // «Выбрать за меня»: случайное блюдо из всего меню, не повторяя только что показанное.
+  const pickRandom = () => {
+    const pool = menuItems.filter((item) => item.id !== selected?.id);
+    const item = pool[Math.floor(Math.random() * pool.length)];
+    setActive(item.category);
+    setSelected(item);
+  };
+
+  const shown = menuItems.filter((item) => item.category === active);
 
   return (
     <section id="menu" aria-labelledby="menu-title" className="scroll-mt-16 bg-cream/60 py-16 sm:py-24">
@@ -66,8 +79,45 @@ export function Menu() {
           <MenuCategories options={categories} active={active} onChange={select} />
         </div>
 
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+          <button
+            type="button"
+            onClick={pickRandom}
+            className="group inline-flex h-11 items-center gap-2 rounded-full bg-terracotta px-5 text-[15px] font-bold text-white transition hover:bg-coffee active:scale-[0.97]"
+          >
+            <DiceIcon className="transition-transform duration-500 group-hover:rotate-[360deg]" />
+            Не знаю, что взять
+          </button>
+
+          <div role="group" aria-label="Вид меню" className="flex rounded-full border border-line bg-white/60 p-1">
+            {(
+              [
+                { id: "cards", label: "Карточки", Icon: GridIcon },
+                { id: "list", label: "Список", Icon: ListIcon },
+              ] as const
+            ).map(({ id, label, Icon }) => (
+              <button
+                key={id}
+                type="button"
+                aria-pressed={view === id}
+                onClick={() => setView(id)}
+                className={`inline-flex h-9 items-center gap-2 rounded-full px-4 text-sm font-semibold transition-colors ${
+                  view === id ? "bg-coffee text-milk" : "text-coffee-soft hover:bg-cream"
+                }`}
+              >
+                <Icon width={18} height={18} />
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div ref={gridRef} className="mt-6 scroll-mt-36">
-          <MenuGrid key={active} items={menuItems.filter((item) => item.category === active)} onOpen={setSelected} />
+          {view === "cards" ? (
+            <MenuGrid key={active} items={shown} onOpen={setSelected} />
+          ) : (
+            <MenuList key={active} items={shown} onOpen={setSelected} />
+          )}
         </div>
       </div>
       <DishDialog item={selected} onClose={() => setSelected(null)} />
