@@ -1,4 +1,5 @@
 import { site } from "@/config/site";
+import { Awning } from "./Awning";
 import { HeroSlides } from "./HeroSlides";
 import { OpenNow } from "./OpenNow";
 import { ArrowIcon, ClockIcon, PhoneIcon, PinIcon } from "./icons";
@@ -6,7 +7,7 @@ import { ArrowIcon, ClockIcon, PhoneIcon, PinIcon } from "./icons";
 export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
-      <div className="awning" aria-hidden="true" />
+      <Awning />
       <div aria-hidden="true" className="blob pointer-events-none absolute -right-24 top-24 size-[26rem] rounded-full bg-terracotta-soft/25 blur-3xl" />
       <div aria-hidden="true" className="blob pointer-events-none absolute -left-28 bottom-0 size-80 rounded-full bg-olive-soft/70 blur-3xl [animation-delay:-6s]" />
 

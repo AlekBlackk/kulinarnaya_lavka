@@ -41,18 +41,55 @@ body {
   border-radius: 6px;
 }
 
-/* Полосатая маркиза над первым экраном — фирменная деталь «лавки». */
+/* Маркиза «лавки»: планка с прострочкой и свисающие фестоны. Объём ткани — слои градиентов:
+   тень по бокам складки, свет сверху, затемнение к краю. */
 .awning {
-  height: 22px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--color-terracotta-soft) 0 32px,
-    var(--color-cream-deep) 32px 64px
-  );
-  /* ровная полоса сверху + фестоны снизу, по одному на каждую полоску */
-  mask:
-    linear-gradient(#000 0 0) 0 0 / 100% 8px no-repeat,
-    radial-gradient(16px 14px at 50% 0, #000 98%, transparent) 0 8px / 32px 14px repeat-x;
+  position: relative;
+  z-index: 1;
+}
+
+.awning-trim {
+  position: relative;
+  height: 9px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.4), transparent 45%, rgb(47 33 27 / 0.22)),
+    var(--color-terracotta);
+  box-shadow: 0 2px 3px rgb(47 33 27 / 0.3);
+}
+.awning-trim::after {
+  content: "";
+  position: absolute;
+  inset: 4px 0 auto;
+  border-top: 1.5px dashed rgb(255 255 255 / 0.55);
+}
+
+.awning-panels {
+  display: flex;
+  margin-top: -1px;
+  overflow-x: clip;
+}
+.awning-panels span {
+  flex: 0 0 32px;
+  height: 30px;
+  border-radius: 0 0 16px 16px / 0 0 14px 14px;
+  transform-origin: top center;
+  background:
+    linear-gradient(90deg, rgb(47 33 27 / 0.16), transparent 24%, transparent 76%, rgb(47 33 27 / 0.16)),
+    linear-gradient(180deg, rgb(255 255 255 / 0.25), transparent 42%, rgb(47 33 27 / 0.16)),
+    var(--panel, var(--color-terracotta-soft));
+  /* тонкая кромка по низу фестона и мягкая тень от него */
+  box-shadow:
+    inset 0 -2px 0 rgb(47 33 27 / 0.14),
+    0 7px 6px -5px rgb(47 33 27 / 0.4);
+}
+.awning-panels span:nth-child(even) {
+  --panel: var(--color-cream-deep);
+}
+
+@media (max-width: 800px) {
+  .awning-panels span:nth-child(n + 26) {
+    display: none;
+  }
 }
 
 /* Появление блоков при прокрутке без JavaScript; где не поддерживается — просто статичный блок. */
@@ -115,6 +152,12 @@ dialog::backdrop {
   .awning {
     transform-origin: top;
     animation: awning-drop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  /* Лёгкое колыхание: каждый фестон качается чуть позже соседа, по полотну идёт волна. */
+  .awning-panels span {
+    animation: awning-sway 4.5s ease-in-out infinite alternate;
+    animation-delay: calc(var(--i, 0) * -0.14s);
   }
 
   .pop {
@@ -511,5 +554,14 @@ dialog::backdrop {
   }
   30% {
     translate: 0 -5px;
+  }
+}
+
+@keyframes awning-sway {
+  from {
+    rotate: -1.6deg;
+  }
+  to {
+    rotate: 1.6deg;
   }
 }

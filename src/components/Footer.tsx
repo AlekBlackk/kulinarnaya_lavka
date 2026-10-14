@@ -1,5 +1,6 @@
 import { site } from "@/config/site";
 import { ArrowIcon, PhoneIcon, RouteIcon } from "./icons";
+import { Awning } from "./Awning";
 import { Logo } from "./Logo";
 
 // Круглая кнопка «Наверх»: надпись по кругу медленно вращается.
@@ -28,7 +29,7 @@ function BackToTop() {
 export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-coffee text-milk">
-      <div className="awning" aria-hidden="true" />
+      <Awning />
 
       <div className="mx-auto max-w-6xl px-4 pt-14 sm:px-6 sm:pt-20">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
