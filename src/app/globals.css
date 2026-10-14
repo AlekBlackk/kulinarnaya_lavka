@@ -375,3 +375,33 @@ dialog::backdrop {
     clip-path: inset(0 0 0 0);
   }
 }
+
+/* Подвал: ссылки с «выезжающим» подчёркиванием, контурная вывеска, вращающаяся надпись «Наверх». */
+.link-slide {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.3s ease;
+}
+.link-slide:hover,
+.link-slide:focus-visible {
+  background-size: 100% 1px;
+}
+
+/* Заливка градиентом, а не контур: у контура на перекрывающихся штрихах шрифта видны артефакты. */
+.wordmark {
+  color: transparent;
+  background: linear-gradient(180deg, rgb(251 246 238 / 0.2), rgb(251 246 238 / 0.04) 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .spin-slow {
+    animation: spin 16s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
