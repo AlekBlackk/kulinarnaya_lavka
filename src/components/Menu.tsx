@@ -1,26 +1,31 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { menuCategories, menuItems, type MenuCategoryId, type MenuItem } from "@/data/menu";
+import { menuCategories, menuItems, type MenuItem } from "@/data/menu";
 import { DishDialog } from "./DishDialog";
 import { GridIcon, ListIcon } from "./icons";
 import { MenuCategories } from "./MenuCategories";
 import { MenuGrid } from "./MenuGrid";
 import { MenuList } from "./MenuList";
 
+const ALL = "all";
+
 // Используются только категории, в которых есть блюда, — пустых вкладок не будет.
-const categories = menuCategories
-  .map((c) => ({ ...c, count: menuItems.filter((item) => item.category === c.id).length }))
-  .filter((c) => c.count > 0);
+const categories = [
+  { id: ALL, label: "Все", count: menuItems.length },
+  ...menuCategories
+    .map((c) => ({ ...c, count: menuItems.filter((item) => item.category === c.id).length }))
+    .filter((c) => c.count > 0),
+];
 
 export function Menu() {
-  const [active, setActive] = useState<MenuCategoryId>(categories[0].id);
+  const [active, setActive] = useState(ALL);
   const [selected, setSelected] = useState<MenuItem | null>(null);
   const [view, setView] = useState<"cards" | "list">("cards");
   const gridRef = useRef<HTMLDivElement>(null);
 
   const select = (id: string) => {
-    setActive(id as MenuCategoryId);
+    setActive(id);
     // Если переключили вкладку, пролистав вниз, — возвращаем к началу списка.
     const grid = gridRef.current;
     if (grid && grid.getBoundingClientRect().top < 0) {
@@ -28,7 +33,7 @@ export function Menu() {
     }
   };
 
-  const shown = menuItems.filter((item) => item.category === active);
+  const shown = active === ALL ? menuItems : menuItems.filter((item) => item.category === active);
 
   return (
     <section id="menu" aria-labelledby="menu-title" className="scroll-mt-16 bg-cream/60 py-16 sm:py-24">

@@ -56,7 +56,6 @@ export function HeroSlides() {
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-coffee/60 to-transparent px-5 pb-4 pt-14 text-white">
         <p key={index} className="fade-in text-sm font-semibold leading-tight">
           {current.label}
-          <span className="block text-xs font-medium text-white/80">иллюстративное фото</span>
         </p>
         <div className="flex shrink-0 items-center">
           {slides.map((slide, i) => (
