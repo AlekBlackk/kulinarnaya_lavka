@@ -452,3 +452,22 @@ dialog::backdrop {
     transform: translateY(6px);
   }
 }
+
+/* Записки «шлёпаются» на доску сверху одна за другой, пока секция въезжает в экран. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .slap {
+      animation: slap linear both;
+      animation-timeline: view();
+      animation-range: entry calc(var(--i, 0) * 7%) entry calc(55% + var(--i, 0) * 7%);
+    }
+  }
+}
+
+@keyframes slap {
+  from {
+    opacity: 0;
+    translate: 0 -56px;
+    scale: 1.1;
+  }
+}

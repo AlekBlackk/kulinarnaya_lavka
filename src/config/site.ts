@@ -74,8 +74,12 @@ export const site = {
   // Из карточки в Яндекс Картах; показывается с указанием источника.
   averageCheck: "150–300 ₽",
 
+  // Рейтинг и число отзывов из той же карточки (проверено 14.10.2026). Обновлять вручную.
+  yandexStats: { rating: 4.3, ratings: 113, reviews: 52, checkedOn: "14.10.2026" },
+
   links: {
     yandexOrg: `https://yandex.ru/maps/org/kulinarnaya_lavka_bistro/${yandexOrgId}/`,
+    yandexReviews: `https://yandex.ru/maps/org/kulinarnaya_lavka_bistro/${yandexOrgId}/reviews/`,
     yandexPhotos: `https://yandex.ru/maps/org/kulinarnaya_lavka_bistro/${yandexOrgId}/gallery/`,
     // На телефоне откроет приложение Яндекс Карт/Навигатора, если оно установлено.
     route: `https://yandex.ru/maps/?rtext=~${coordinates.lat}%2C${coordinates.lon}&rtt=auto`,
