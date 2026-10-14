@@ -98,7 +98,9 @@ export function Header() {
                   aria-current={active === item.href ? "location" : undefined}
                   onMouseEnter={() => setHovered(item.href)}
                   onFocus={() => setHovered(item.href)}
-                  onBlur={() => setHovered(null)}
+                  // Переход по якорю снимает фокус со ссылки; пока курсор над ней, бегунок остаётся на месте,
+                  // иначе он на миг уезжает к прежнему разделу, пока страница ещё не доскроллила.
+                  onBlur={(e) => !e.currentTarget.matches(":hover") && setHovered(null)}
                   className={`block whitespace-nowrap rounded-full px-4 py-2 text-[15px] font-semibold transition-colors duration-200 ${
                     target === item.href ? "text-white" : "text-coffee-soft"
                   }`}

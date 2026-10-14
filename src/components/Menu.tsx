@@ -64,14 +64,9 @@ export function Menu() {
               </span>
             </h2>
           </div>
-        </div>
 
-        <div className="sticky top-16 z-20 -mx-4 mt-8 bg-cream/95 px-4 py-3 backdrop-blur sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:backdrop-blur-none">
-          <MenuCategories options={categories} active={active} onChange={select} />
-        </div>
-
-        <div className="mt-4 flex justify-end">
-          <div role="group" aria-label="Вид меню" className="flex rounded-full border border-line bg-white/60 p-1">
+          {/* В шапке переключатель занимает пустое место справа и не съедает отдельную строку. */}
+          <div role="group" aria-label="Вид меню" className="flex self-start rounded-full border border-line bg-white/60 p-1 md:self-auto">
             {(
               [
                 { id: "cards", label: "Карточки", Icon: GridIcon },
@@ -94,7 +89,11 @@ export function Menu() {
           </div>
         </div>
 
-        <div ref={gridRef} className="mt-6 scroll-mt-36">
+        <div className="sticky top-16 z-20 -mx-4 mt-6 bg-cream/95 px-4 py-3 backdrop-blur sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:backdrop-blur-none">
+          <MenuCategories options={categories} active={active} onChange={select} />
+        </div>
+
+        <div ref={gridRef} className="mt-4 scroll-mt-36">
           {view === "cards" ? (
             <MenuGrid key={active} items={shown} onOpen={setSelected} />
           ) : (

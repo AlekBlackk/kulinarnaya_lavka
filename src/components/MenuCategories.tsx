@@ -42,7 +42,7 @@ export function MenuCategories({ options, active, onChange }: Props) {
   }, [active]);
 
   return (
-    <div ref={listRef} className="no-scrollbar relative -mx-4 flex gap-2 overflow-x-auto px-4 pb-2.5 pt-1 sm:mx-0 sm:px-0">
+    <div ref={listRef} className="no-scrollbar relative -mx-4 flex gap-1.5 overflow-x-auto px-4 pb-2.5 pt-1 sm:mx-0 sm:px-0">
       {pill && (
         <span
           aria-hidden="true"
@@ -59,7 +59,7 @@ export function MenuCategories({ options, active, onChange }: Props) {
             type="button"
             aria-pressed={isActive}
             onClick={() => onChange(option.id)}
-            className={`relative flex h-11 shrink-0 items-center gap-2 rounded-full border px-5 text-[15px] font-semibold transition-colors duration-200 active:scale-[0.97] ${
+            className={`relative flex h-11 shrink-0 items-center gap-1.5 rounded-full border px-4 text-[15px] font-semibold transition-colors duration-200 active:scale-[0.97] ${
               isActive
                 ? "border-transparent text-milk"
                 : "border-line bg-white/60 text-coffee-soft hover:border-coffee/40 hover:bg-white"
