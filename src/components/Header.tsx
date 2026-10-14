@@ -82,11 +82,12 @@ export function Header() {
           <ul
             ref={listRef}
             onMouseLeave={() => setHovered(null)}
-            className="relative flex items-center gap-0.5 rounded-full bg-cream/70 p-1 ring-1 ring-line"
+            className="relative flex items-center gap-2.5"
           >
+            {/* Бегунок-«наклейка»: обводка, жёсткая тень и лёгкий наклон, как у стикеров в hero. */}
             <li
               aria-hidden="true"
-              className={`absolute inset-y-1 rounded-full bg-terracotta shadow-[0_6px_14px_-6px_var(--color-terracotta)] transition-[left,width,opacity] duration-300 ease-[cubic-bezier(0.34,1.4,0.64,1)] motion-reduce:transition-none ${
+              className={`absolute inset-y-0 -rotate-2 rounded-full border-2 border-coffee bg-cream shadow-[3px_3px_0_var(--color-coffee)] transition-[left,width,opacity] duration-300 ease-[cubic-bezier(0.34,1.4,0.64,1)] motion-reduce:transition-none ${
                 target ? "opacity-100" : "opacity-0"
               }`}
               style={{ left: pill.left, width: pill.width }}
@@ -101,8 +102,8 @@ export function Header() {
                   // Переход по якорю снимает фокус со ссылки; пока курсор над ней, бегунок остаётся на месте,
                   // иначе он на миг уезжает к прежнему разделу, пока страница ещё не доскроллила.
                   onBlur={(e) => !e.currentTarget.matches(":hover") && setHovered(null)}
-                  className={`block whitespace-nowrap rounded-full px-4 py-2 text-[15px] font-semibold transition-colors duration-200 ${
-                    target === item.href ? "text-white" : "text-coffee-soft"
+                  className={`block whitespace-nowrap rounded-full px-5 py-2.5 text-[15px] font-semibold transition-colors duration-200 ${
+                    target === item.href ? "text-coffee" : "text-coffee-soft"
                   }`}
                 >
                   {item.label}

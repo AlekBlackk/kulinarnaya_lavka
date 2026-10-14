@@ -18,10 +18,7 @@ export function Hero() {
             Кафе домашней кухни в Тамбове
           </p>
 
-          {/* Место под статус занято заранее, чтобы заголовок не прыгал, когда статус посчитается в браузере. */}
-          <OpenNow className="mt-2 justify-start" />
-
-          <h1 className="mt-3 font-display text-[clamp(2.1rem,10.5vw,3rem)] font-bold leading-[1.02] tracking-tight text-coffee sm:text-6xl lg:text-[3.4rem] xl:text-[4.25rem]">
+          <h1 className="mt-4 font-display text-[clamp(2.1rem,10.5vw,3rem)] font-bold leading-[1.02] tracking-tight text-coffee sm:text-6xl lg:text-[3.4rem] xl:text-[4.25rem]">
             <span className="word" style={{ "--i": 0 } as React.CSSProperties}>Вкусные</span>{" "}
             <span className="word relative" style={{ "--i": 1 } as React.CSSProperties}>
               <em className="font-semibold text-terracotta">обеды</em>
@@ -98,10 +95,14 @@ export function Hero() {
             </li>
             <li className="flex items-start gap-3 sm:col-span-2">
               <ClockIcon className="mt-0.5 shrink-0 text-terracotta" />
-              <span>
-                {site.hours.display.map((h) => `${h.days} ${h.time}`).join(", ")}
-                {!site.hours.confirmed && <span className="text-muted"> · уточняйте по телефону</span>}
-              </span>
+              <div>
+                <p>
+                  {site.hours.display.map((h) => `${h.days} ${h.time}`).join(", ")}
+                  {!site.hours.confirmed && <span className="text-muted"> · уточняйте по телефону</span>}
+                </p>
+                {/* Место под статус занято заранее, чтобы блок не прыгал, когда статус посчитается в браузере. */}
+                <OpenNow className="mt-2 justify-start" />
+              </div>
             </li>
           </ul>
         </div>
