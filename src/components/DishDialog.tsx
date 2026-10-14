@@ -49,12 +49,6 @@ export function DishDialog({ item, onClose }: Props) {
             </div>
             <p className="mt-3 leading-relaxed text-muted">{item.description}</p>
 
-            {item.demo && (
-              <p className="mt-4 rounded-2xl border border-dashed border-terracotta-soft/60 px-4 py-3 text-sm text-muted">
-                Пример блюда: описание и цена демонстрационные.
-              </p>
-            )}
-
             <a
               href={site.phone.href}
               className="mt-5 inline-flex h-12 items-center gap-2 rounded-full bg-terracotta px-6 font-bold text-white transition hover:bg-coffee active:scale-[0.98]"

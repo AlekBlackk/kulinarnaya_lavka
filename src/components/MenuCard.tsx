@@ -14,11 +14,6 @@ export function MenuCard({ item, onOpen }: { item: MenuItem; onOpen: (item: Menu
           sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 128px"
           className="transition-transform duration-500 group-hover:scale-105"
         />
-        {item.demo && (
-          <span className="absolute left-2 top-2 rounded-full bg-milk/90 px-2 py-0.5 text-[11px] font-semibold text-muted backdrop-blur sm:left-3 sm:top-3 sm:px-2.5 sm:py-1 sm:text-xs">
-            пример
-          </span>
-        )}
       </div>
       <div className="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
         <h3 className="font-display text-lg font-semibold leading-snug text-coffee sm:text-xl">

@@ -1,5 +1,5 @@
 import { site } from "@/config/site";
-import { ArrowIcon, PhoneIcon, RouteIcon } from "./icons";
+import { ArrowIcon, ClockIcon, PhoneIcon, PinIcon, RouteIcon } from "./icons";
 import { Awning } from "./Awning";
 import { Logo } from "./Logo";
 
@@ -9,7 +9,7 @@ function BackToTop() {
     <a
       href="#top"
       aria-label="Наверх"
-      className="group relative flex size-28 shrink-0 items-center justify-center rounded-full bg-terracotta text-milk transition hover:bg-terracotta-soft active:scale-95"
+      className="group relative flex size-28 shrink-0 items-center self-center md:self-auto justify-center rounded-full bg-terracotta text-milk transition hover:bg-terracotta-soft active:scale-95"
     >
       <svg viewBox="0 0 100 100" aria-hidden="true" className="spin-slow absolute inset-0 size-full">
         <defs>
@@ -36,7 +36,26 @@ export function Footer() {
           <div>
             <p className="font-hand text-2xl text-terracotta-soft">ждём вас</p>
             <p className="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
-              Приходите <em className="font-semibold text-terracotta-soft">на обед</em>
+              Приходите{" "}
+              <span className="relative inline-block">
+                <em className="font-semibold text-terracotta-soft">на обед</em>
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 200 12"
+                  preserveAspectRatio="none"
+                  className="absolute -bottom-3 left-0 h-2.5 w-full overflow-visible text-terracotta-soft sm:-bottom-4"
+                >
+                  <path
+                    className="scribble scribble-view"
+                    pathLength="1"
+                    d="M2 7C40 2 70 11 105 6S170 3 198 7"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
             </p>
             <p className="mt-4 max-w-md text-milk/70">
               {site.address.street}, {site.address.details}. Суп, горячее и выпечка — на месте или с собой.
@@ -71,11 +90,16 @@ export function Footer() {
 
           <nav aria-label="Разделы сайта">
             <p className="text-sm font-semibold uppercase tracking-wider text-milk/50">Разделы</p>
-            <ul className="mt-3">
+            {/* Тонкие строки с разделителем и стрелкой: ссылки читаются как нажимаемые, но без рамок и заливки. */}
+            <ul className="mt-2 grid grid-cols-2 gap-x-6 md:grid-cols-1">
               {site.nav.map((item) => (
-                <li key={item.href}>
-                  <a href={item.href} className="link-slide inline-block py-2">
+                <li key={item.href} className="border-b border-milk/10">
+                  <a
+                    href={item.href}
+                    className="group flex h-12 items-center justify-between gap-2 transition-colors hover:text-terracotta-soft"
+                  >
                     {item.label}
+                    <ArrowIcon width={16} height={16} className="shrink-0 text-milk/40 transition group-hover:translate-x-1 group-hover:text-terracotta-soft" />
                   </a>
                 </li>
               ))}
@@ -84,14 +108,17 @@ export function Footer() {
 
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-milk/50">Контакты</p>
-            <address className="mt-3 not-italic">
-              <a href={site.phone.href} className="link-slide inline-block py-2 text-lg font-bold">
+            <address className="mt-2 flex flex-col not-italic">
+              <a href={site.phone.href} className="contact-link flex items-center gap-3 self-start text-xl font-bold">
+                <PhoneIcon className="shrink-0 text-terracotta-soft" />
                 {site.phone.display}
               </a>
-              <a href={site.links.yandexOrg} target="_blank" rel="noopener" className="link-slide block py-2">
+              <a href={site.links.yandexOrg} target="_blank" rel="noopener" className="contact-link flex items-start gap-3 self-start">
+                <PinIcon className="mt-0.5 shrink-0 text-terracotta-soft" />
                 {site.address.city}, {site.address.street}, {site.address.details}
               </a>
-              <p className="text-milk/70">
+              <p className="flex items-start gap-3 py-2 text-milk/70">
+                <ClockIcon className="mt-0.5 shrink-0 text-terracotta-soft" />
                 {site.hours.display.map((h) => `${h.days} ${h.time}`).join(", ")}
               </p>
             </address>

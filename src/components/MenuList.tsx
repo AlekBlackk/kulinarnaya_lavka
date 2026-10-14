@@ -25,7 +25,6 @@ export function MenuList({ items, onOpen }: { items: MenuItem[]; onOpen: (item: 
             <span className="min-w-0 flex-1">
               <span className="flex items-baseline gap-2">
                 <span className="min-w-0 font-display text-lg font-semibold leading-snug">{item.name}</span>
-                {item.demo && <span className="shrink-0 text-xs font-semibold text-muted">пример</span>}
                 <span aria-hidden="true" className="min-w-4 flex-1 border-b-2 border-dotted border-coffee/20" />
                 <span className="shrink-0 whitespace-nowrap font-display text-lg font-bold text-terracotta">
                   {formatPrice(item.price)}

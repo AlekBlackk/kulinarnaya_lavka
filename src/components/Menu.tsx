@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import { menuCategories, menuItems, type MenuCategoryId, type MenuItem } from "@/data/menu";
-import { site } from "@/config/site";
 import { DishDialog } from "./DishDialog";
 import { GridIcon, ListIcon } from "./icons";
 import { MenuCategories } from "./MenuCategories";
@@ -60,11 +59,6 @@ export function Menu() {
               </span>
             </h2>
           </div>
-          <ul className="flex flex-wrap gap-2 text-sm font-semibold text-coffee-soft">
-            <li className="rounded-full border border-line bg-milk px-3.5 py-1.5">Средний чек {site.averageCheck}</li>
-            <li className="rounded-full border border-line bg-milk px-3.5 py-1.5">Еда навынос</li>
-            <li className="rounded-full border border-line bg-milk px-3.5 py-1.5">Кофе с собой</li>
-          </ul>
         </div>
 
         <div className="sticky top-16 z-20 -mx-4 mt-8 bg-cream/95 px-4 py-3 backdrop-blur sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:backdrop-blur-none">

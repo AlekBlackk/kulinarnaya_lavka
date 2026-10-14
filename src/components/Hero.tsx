@@ -82,7 +82,8 @@ export function Hero() {
             </a>
           </div>
 
-          <ul className="mt-6 grid gap-x-8 gap-y-2.5 border-t border-line pt-5 sm:mt-9 sm:gap-y-3 sm:pt-6 text-[15px] sm:grid-cols-2">
+          {/* На телефоне контакты уже есть в шапке и в «Где нас найти»; здесь они уводят фото ниже первого экрана. */}
+          <ul className="mt-9 hidden gap-x-8 gap-y-3 border-t border-line pt-6 text-[15px] sm:grid sm:grid-cols-2">
             <li className="flex items-start gap-3">
               <PinIcon className="mt-0.5 shrink-0 text-terracotta" />
               <a href={site.links.yandexOrg} target="_blank" rel="noopener" className="relative hover:text-terracotta before:absolute before:-inset-y-2.5 before:inset-x-0">

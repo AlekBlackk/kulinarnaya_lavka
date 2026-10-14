@@ -399,15 +399,17 @@ dialog::backdrop {
   }
 }
 
-/* Подвал: ссылки с «выезжающим» подчёркиванием, контурная вывеска, вращающаяся надпись «Наверх». */
-.link-slide {
-  /* подчёркивание на 0.45rem выше низа: у ссылок есть вертикальные поля под удобное нажатие */
-  background: linear-gradient(currentColor, currentColor) 0 calc(100% - 0.45rem) / 0 1px no-repeat;
-  transition: background-size 0.3s ease;
+/* Подвал: контакты подсвечиваются мягкой плашкой, контурная вывеска, вращающаяся надпись «Наверх». */
+.contact-link {
+  /* Поля и отрицательный отступ: плашка шире текста, а сам текст остаётся на одной линии с иконками соседних строк. */
+  margin-inline: -0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  transition: background-color 0.2s ease;
 }
-.link-slide:hover,
-.link-slide:focus-visible {
-  background-size: 100% 1px;
+.contact-link:hover,
+.contact-link:focus-visible {
+  background-color: rgb(251 246 238 / 0.1);
 }
 
 /* Вывеска в подвале. Заливка градиентом, а не контур: у контура на перекрывающихся штрихах шрифта видны артефакты.

@@ -88,14 +88,6 @@ export function Location() {
                 )}
               </div>
 
-              <div className="my-5 border-t-2 border-dashed border-coffee/20" />
-
-              <dl>
-                <Row label="Средний чек">
-                  <span className="font-display text-xl font-bold text-terracotta">{site.averageCheck}</span>
-                </Row>
-              </dl>
-
               <div className="mt-6 flex flex-col gap-3 sm:flex-row md:flex-col xl:flex-row">
                 <a
                   href={site.links.route}
