@@ -155,3 +155,39 @@ dialog::backdrop {
     transform: translateY(14px) scale(0.98);
   }
 }
+
+/* Кнопка «Позвонить» раз в несколько секунд мягко «звенит» кольцом; трубка покачивается при наведении. */
+@media (prefers-reduced-motion: no-preference) {
+  .call-btn {
+    animation: call-pulse 3.5s ease-out infinite;
+  }
+}
+
+@keyframes call-pulse {
+  0%,
+  70%,
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+  75% {
+    box-shadow: 0 0 0 0 rgb(168 75 42 / 0.45);
+  }
+  100% {
+    box-shadow: 0 0 0 14px transparent;
+  }
+}
+
+@keyframes ring {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  20%,
+  60% {
+    rotate: -18deg;
+  }
+  40%,
+  80% {
+    rotate: 18deg;
+  }
+}
