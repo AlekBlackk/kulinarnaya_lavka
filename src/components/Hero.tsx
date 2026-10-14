@@ -1,13 +1,15 @@
 import { site } from "@/config/site";
-import { FoodImage } from "./FoodImage";
+import { HeroSlides } from "./HeroSlides";
 import { ArrowIcon, ClockIcon, PhoneIcon, PinIcon } from "./icons";
 
 export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="awning" aria-hidden="true" />
+      <div aria-hidden="true" className="blob pointer-events-none absolute -right-24 top-24 size-[26rem] rounded-full bg-terracotta-soft/25 blur-3xl" />
+      <div aria-hidden="true" className="blob pointer-events-none absolute -left-28 bottom-0 size-80 rounded-full bg-olive-soft/70 blur-3xl [animation-delay:-6s]" />
 
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-16 pt-6 sm:px-6 md:pt-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-32">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 pb-16 pt-6 sm:px-6 md:pt-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-32">
         <div>
           <p className="inline-flex items-center gap-2 rounded-full bg-olive-soft px-3.5 py-1.5 text-sm font-semibold text-olive">
             <span className="size-1.5 rounded-full bg-olive" aria-hidden="true" />
@@ -100,28 +102,18 @@ export function Hero() {
 
         <div className="relative mx-auto w-full max-w-md lg:max-w-none">
           <div className="relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-[2rem] bg-cream shadow-[0_30px_60px_-30px_rgba(47,33,27,0.45)] ring-8 ring-cream">
-            <FoodImage
-              src={site.heroImage.src}
-              alt={site.heroImage.alt}
-              sizes="(min-width: 1024px) 480px, (min-width: 448px) 448px, 100vw"
-              preload
-            />
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-              <span className="steam left-[28%]" />
-              <span className="steam left-[48%] [animation-delay:1.4s]" />
-              <span className="steam left-[66%] [animation-delay:2.6s]" />
-            </div>
-            {site.heroImage.illustrative && (
-              <span className="absolute bottom-3 right-4 text-xs font-medium text-white/85 drop-shadow">
-                иллюстративное фото
-              </span>
-            )}
+            <HeroSlides />
           </div>
 
           <div className="sticker absolute -left-2 top-[12%] flex size-28 -rotate-[10deg] flex-col items-center justify-center rounded-full bg-olive text-center text-milk shadow-lg sm:-left-6 sm:size-32">
             <span className="text-[11px] font-semibold uppercase tracking-wider opacity-80">средний чек</span>
             <span className="font-display text-xl font-bold leading-tight sm:text-2xl">{site.averageCheck}</span>
             <span className="text-[10px] opacity-75">по Яндекс Картам</span>
+          </div>
+
+          <div className="float absolute -right-2 top-[58%] flex rotate-3 items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-bold text-coffee shadow-lg sm:-right-5">
+            <span className="size-2.5 rounded-full bg-olive" aria-hidden="true" />
+            Можно с собой
           </div>
 
           <p className="absolute left-6 top-full mt-4 hidden rotate-[-3deg] font-hand text-[1.7rem] leading-tight text-coffee-soft lg:block">

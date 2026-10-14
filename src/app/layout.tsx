@@ -36,10 +36,10 @@ export const metadata: Metadata = {
     images: [
       {
         // shortcut: параметры размера понимает только Unsplash; для своего фото подготовьте файл 1200×630
-        url: `${site.heroImage.src}?w=1200&h=630&fit=crop&auto=format&q=75`,
+        url: `${site.heroSlides[0].src}?w=1200&h=630&fit=crop&auto=format&q=75`,
         width: 1200,
         height: 630,
-        alt: site.heroImage.alt,
+        alt: site.heroSlides[0].alt,
       },
     ],
   },

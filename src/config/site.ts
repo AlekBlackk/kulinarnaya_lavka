@@ -42,12 +42,34 @@ export const site = {
     timeZone: "Europe/Moscow", // Тамбов живёт по московскому времени
   },
 
-  // Фото первого экрана и превью ссылки в соцсетях. Замените на собственное фото, когда оно появится.
-  heroImage: {
-    src: "https://images.unsplash.com/photo-1648726445011-9fbf3a5ddb90",
-    alt: "Тарелка борща со сметаной и зеленью",
-    illustrative: true,
-  },
+  // Слайды первого экрана; первый также служит превью ссылки в соцсетях. Иллюстративные фото (Unsplash):
+  // замените на собственные, когда появятся. steam: true — показывать пар над горячим блюдом.
+  heroSlides: [
+    {
+      src: "https://images.unsplash.com/photo-1648726445011-9fbf3a5ddb90",
+      alt: "Тарелка борща со сметаной и зеленью",
+      label: "Борщ со сметаной",
+      steam: true,
+    },
+    {
+      src: "https://images.unsplash.com/photo-1723511413901-99439b957bbf",
+      alt: "Тушёное мясо с подливкой и картофельным пюре",
+      label: "Горячее с пюре",
+      steam: true,
+    },
+    {
+      src: "https://images.unsplash.com/photo-1746211108786-ca20c8f80ecd",
+      alt: "Салат «Цезарь» с сухариками",
+      label: "Салат «Цезарь»",
+      steam: false,
+    },
+    {
+      src: "https://images.unsplash.com/photo-1702742136812-d6f9de6df0cf",
+      alt: "Корзинка с печёными пирожками",
+      label: "Печёные пирожки",
+      steam: false,
+    },
+  ],
 
   // Из карточки в Яндекс Картах; показывается с указанием источника.
   averageCheck: "150–300 ₽",

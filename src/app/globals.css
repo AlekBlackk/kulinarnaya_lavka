@@ -405,3 +405,50 @@ dialog::backdrop {
     transform: rotate(360deg);
   }
 }
+
+/* Первый экран: «приближение» активного слайда, плавающая наклейка, дрейфующие пятна цвета на фоне. */
+@media (prefers-reduced-motion: no-preference) {
+  .kenburns {
+    animation: kenburns 7s ease-out forwards;
+  }
+
+  .float {
+    animation: float 5s ease-in-out infinite alternate;
+  }
+
+  .blob {
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+
+  .fade-in {
+    animation: fade-in 0.6s ease-out both;
+  }
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes float {
+  to {
+    translate: 0 -8px;
+  }
+}
+
+@keyframes drift {
+  to {
+    transform: translate(-40px, 30px) scale(1.1);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
