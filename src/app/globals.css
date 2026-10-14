@@ -1,26 +1,85 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-milk: #fbf6ee;
+  --color-cream: #f3e6d1;
+  --color-cream-deep: #ead6b8;
+  --color-terracotta: #a84b2a; /* текст и кнопки: контраст ≥ 4.5 на молочном и белом */
+  --color-terracotta-soft: #d0784f; /* только для декора */
+  --color-olive: #5f6a3a;
+  --color-olive-soft: #dfe2c8;
+  --color-coffee: #2f211b;
+  --color-coffee-soft: #4a372d;
+  --color-muted: #6b5a4e;
+  --color-line: #e6d7c2;
+
+  --font-display: var(--font-lora), Georgia, serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+  --font-hand: var(--font-caveat), cursive;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  background: var(--color-milk);
+  color: var(--color-coffee);
+  -webkit-tap-highlight-color: transparent;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-olive);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Полосатая маркиза над первым экраном — фирменная деталь «лавки». */
+.awning {
+  height: 22px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-terracotta-soft) 0 32px,
+    var(--color-cream-deep) 32px 64px
+  );
+  /* ровная полоса сверху + фестоны снизу, по одному на каждую полоску */
+  mask:
+    linear-gradient(#000 0 0) 0 0 / 100% 8px no-repeat,
+    radial-gradient(16px 14px at 50% 0, #000 98%, transparent) 0 8px / 32px 14px repeat-x;
+}
+
+/* Появление блоков при прокрутке без JavaScript; где не поддерживается — просто статичный блок. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+dialog::backdrop {
+  background: rgb(47 33 27 / 0.85);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

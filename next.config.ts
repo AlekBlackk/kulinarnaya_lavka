@@ -1,9 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  // Статическая сборка в папку out/ — подходит для любого хостинга с HTTPS, сервер Node.js не нужен.
+  output: "export",
+  images: {
+    loader: "custom",
+    loaderFile: "./src/image-loader.ts",
+  },
   turbopack: {
     rules: {
       "*.css": {

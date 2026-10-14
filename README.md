@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Кулинарная лавка & bistro — сайт кафе
 
-## Getting Started
+Одностраничный сайт кафе домашней кухни в Тамбове (ул. Студенецкая, 14).
+Next.js 16 + TypeScript + Tailwind CSS 4, собирается в статические файлы — для работы не нужен ни сервер Node.js, ни база данных.
 
-First, run the development server:
+## Запуск
+
+Нужен Node.js 20.9 или новее.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # разработка: http://localhost:3000
+npm run build      # сборка готового сайта в папку out/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Посмотреть собранный сайт локально: `python -m http.server 4000 -d out` → http://localhost:4000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Где менять информацию
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Что | Файл |
+| --- | --- |
+| Телефон, адрес, часы работы, ссылки на Яндекс Карты, преимущества, пункты меню навигации, фото первого экрана | `src/config/site.ts` |
+| Блюда, цены, описания, фото, категории меню | `src/data/menu.ts` |
+| Фотогалерея | `src/data/gallery.ts` |
+| Цвета и шрифты | `src/app/globals.css` (блок `@theme`), `src/app/layout.tsx` |
 
-## Learn More
+Компоненты (`src/components/`) данных не содержат — после правки этих файлов достаточно пересобрать сайт.
 
-To learn more about Next.js, take a look at the following resources:
+**Меню.** Сейчас все позиции демонстрационные (`demo: true`): на сайте над меню висит заметная плашка, а у каждой карточки — пометка «пример». Когда появится настоящее меню, замените позиции и поставьте `demo: false` — плашка исчезнет сама, как только не останется ни одного демо-блюда. Категория без блюд автоматически не показывается.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Фото.** Свои фотографии кладите в `public/photos/` и указывайте путь `"/photos/borsch.jpg"`. Перед загрузкой уменьшите их примерно до 1600 px по длинной стороне (WebP или JPEG): при статической сборке сайт не сжимает собственные фото. Если фото нет или файл не открылся, карточка показывает аккуратную заглушку.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Часы работы** взяты из Яндекс Карт и пока помечены как «уточняйте по телефону». После подтверждения владельцем поставьте `hours.confirmed: true` — пометка уберётся, а часы попадут в разметку Schema.org для поисковиков.
 
-## Deploy on Vercel
+## Публикация на домене с HTTPS
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Укажите адрес сайта и соберите проект:
+   ```bash
+   NEXT_PUBLIC_SITE_URL=https://ваш-домен.ru npm run build
+   ```
+   (в PowerShell: `$env:NEXT_PUBLIC_SITE_URL="https://ваш-домен.ru"; npm run build`).
+   Адрес нужен для canonical-ссылки, sitemap.xml, robots.txt и превью в соцсетях.
+2. Загрузите **содержимое** папки `out/` в корень сайта на хостинге.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Подойдёт любой хостинг статических файлов:
+
+- **Обычный виртуальный хостинг** (Timeweb, Beget, REG.RU и т. п.): загрузите `out/` через файловый менеджер или FTP в папку `public_html`, привяжите домен и включите бесплатный сертификат Let's Encrypt в панели управления.
+- **Свой VPS с nginx**: скопируйте `out/` в `/var/www/lavka`, в конфиге сайта укажите `root /var/www/lavka;` и `try_files $uri $uri.html $uri/ =404;`, сертификат — `certbot --nginx -d ваш-домен.ru`.
+- **Netlify / Vercel / Cloudflare Pages**: подключите репозиторий, команда сборки `npm run build`, папка публикации `out`, переменная окружения `NEXT_PUBLIC_SITE_URL`. HTTPS включается автоматически.
+
+После публикации добавьте сайт в Яндекс Вебмастер и укажите ссылку на сайт в карточке организации в Яндекс Бизнесе.
+
+## Что ещё нужно получить у владельца
+
+- Действующее меню: названия, цены, состав или краткие описания, вес порций (если его нужно показывать).
+- Подтверждённые часы работы и почтовый индекс.
+- Собственные фотографии блюд, зала и входа (или разрешение использовать фото из карточки на Яндекс Картах — авторские права на них принадлежат загрузившим их гостям).
+- Логотип, если он есть (сейчас используется текстовый знак).
+- Доменное имя и доступ к хостингу.
+- Подтверждение формулировок в блоке «Почему к нам» (линия раздачи, еда навынос).
+- Способы оплаты, доставка, проведение праздников — если это актуально и об этом стоит писать.
