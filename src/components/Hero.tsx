@@ -21,7 +21,7 @@ export function Hero() {
           {/* Место под статус занято заранее, чтобы заголовок не прыгал, когда статус посчитается в браузере. */}
           <OpenNow className="mt-2 justify-start" />
 
-          <h1 className="mt-3 font-display text-[2.1rem] font-bold leading-[1.02] min-[360px]:text-[2.6rem] tracking-tight text-coffee min-[400px]:text-5xl sm:text-6xl xl:text-[4.25rem]">
+          <h1 className="mt-3 font-display text-[clamp(2.1rem,10.5vw,3rem)] font-bold leading-[1.02] tracking-tight text-coffee sm:text-6xl lg:text-[3.4rem] xl:text-[4.25rem]">
             <span className="word" style={{ "--i": 0 } as React.CSSProperties}>Вкусные</span>{" "}
             <span className="word relative" style={{ "--i": 1 } as React.CSSProperties}>
               <em className="font-semibold text-terracotta">обеды</em>
@@ -85,13 +85,13 @@ export function Hero() {
           <ul className="mt-6 grid gap-x-8 gap-y-2.5 border-t border-line pt-5 sm:mt-9 sm:gap-y-3 sm:pt-6 text-[15px] sm:grid-cols-2">
             <li className="flex items-start gap-3">
               <PinIcon className="mt-0.5 shrink-0 text-terracotta" />
-              <a href={site.links.yandexOrg} target="_blank" rel="noopener" className="hover:text-terracotta">
+              <a href={site.links.yandexOrg} target="_blank" rel="noopener" className="relative hover:text-terracotta before:absolute before:-inset-y-2.5 before:inset-x-0">
                 {site.address.street}, {site.address.details}
               </a>
             </li>
             <li className="flex items-start gap-3">
               <PhoneIcon className="mt-0.5 shrink-0 text-terracotta" />
-              <a href={site.phone.href} className="font-semibold hover:text-terracotta">
+              <a href={site.phone.href} className="relative font-semibold hover:text-terracotta before:absolute before:-inset-y-2.5 before:inset-x-0">
                 {site.phone.display}
               </a>
             </li>

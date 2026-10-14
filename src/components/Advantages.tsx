@@ -73,7 +73,7 @@ export function Advantages() {
         <div className="reveal flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-2xl">
           <p className="font-hand text-2xl text-terracotta-soft">почему к нам заходят</p>
-          <h2 id="about-title" className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
+          <h2 id="about-title" className="font-display text-4xl font-bold tracking-tight max-sm:leading-[1.5] sm:text-5xl">
             Обед, который{" "}
             <span className="relative inline-block">
               <em className="font-semibold text-terracotta-soft">не нужно</em>

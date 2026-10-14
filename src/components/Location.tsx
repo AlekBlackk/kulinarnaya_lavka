@@ -18,7 +18,7 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 export function Location() {
   return (
     <section id="contacts" aria-labelledby="contacts-title" className="scroll-mt-16 bg-cream/60 py-16 sm:py-24">
-      <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+      <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 md:grid-cols-[0.9fr_1.1fr] md:gap-8 lg:gap-14">
         <div>
           <div className="reveal">
             <p className="font-hand text-2xl text-terracotta">заходите на обед</p>
@@ -96,19 +96,19 @@ export function Location() {
                 </Row>
               </dl>
 
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row md:flex-col xl:flex-row">
                 <a
                   href={site.links.route}
                   target="_blank"
                   rel="noopener"
-                  className="inline-flex h-13 flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-terracotta px-6 font-bold text-white transition hover:bg-coffee active:scale-[0.98]"
+                  className="inline-flex h-13 items-center sm:flex-1 md:flex-none xl:flex-1 justify-center gap-2 whitespace-nowrap rounded-full bg-terracotta px-6 font-bold text-white transition hover:bg-coffee active:scale-[0.98]"
                 >
                   <RouteIcon />
                   Построить маршрут
                 </a>
                 <a
                   href={site.phone.href}
-                  className="inline-flex h-13 flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-full border-2 border-coffee/15 px-6 font-bold transition hover:border-coffee hover:bg-cream active:scale-[0.98]"
+                  className="inline-flex h-13 items-center sm:flex-1 md:flex-none xl:flex-1 justify-center gap-2 whitespace-nowrap rounded-full border-2 border-coffee/15 px-6 font-bold transition hover:border-coffee hover:bg-cream active:scale-[0.98]"
                 >
                   <PhoneIcon />
                   Позвонить
@@ -147,13 +147,13 @@ export function Location() {
         </div>
 
         {/* Карта в рамке-открытке: чуть наклонена, «приклеена» скотчем. */}
-        <div className="reveal relative lg:pt-16">
+        <div className="reveal relative md:pt-16">
           {/* Пунктирный путь «к нам» над картой — декор, только на широком экране. */}
           <svg
             aria-hidden="true"
             viewBox="0 0 400 60"
             fill="none"
-            className="absolute -left-10 top-0 hidden h-16 w-[calc(100%+2.5rem)] text-terracotta-soft lg:block"
+            className="absolute -left-10 top-0 hidden h-16 w-[calc(100%+2.5rem)] text-terracotta-soft md:block"
           >
             <path
               pathLength="1"

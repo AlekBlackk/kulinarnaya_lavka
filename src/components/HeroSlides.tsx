@@ -66,7 +66,7 @@ export function HeroSlides() {
               onClick={() => setIndex(i)}
               aria-label={`Показать: ${slide.label}`}
               aria-current={i === index}
-              className="group flex h-6 items-center px-1"
+              className="group flex h-11 items-center px-2"
             >
               <span
                 className={`block h-2 rounded-full bg-white transition-all duration-300 ${

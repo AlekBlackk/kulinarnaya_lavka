@@ -41,7 +41,7 @@ export function Footer() {
             <p className="mt-4 max-w-md text-milk/70">
               {site.address.street}, {site.address.details}. Суп, горячее и выпечка — на месте или с собой.
             </p>
-            <div className="mt-7 flex flex-col gap-3 min-[420px]:flex-row">
+            <div className="mt-7 flex flex-col gap-3 min-[520px]:flex-row">
               <a
                 href={site.links.route}
                 target="_blank"
@@ -71,10 +71,10 @@ export function Footer() {
 
           <nav aria-label="Разделы сайта">
             <p className="text-sm font-semibold uppercase tracking-wider text-milk/50">Разделы</p>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-3">
               {site.nav.map((item) => (
                 <li key={item.href}>
-                  <a href={item.href} className="link-slide inline-block py-1">
+                  <a href={item.href} className="link-slide inline-block py-2">
                     {item.label}
                   </a>
                 </li>
@@ -84,11 +84,11 @@ export function Footer() {
 
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-milk/50">Контакты</p>
-            <address className="mt-4 space-y-2 not-italic">
-              <a href={site.phone.href} className="link-slide inline-block py-1 text-lg font-bold">
+            <address className="mt-3 not-italic">
+              <a href={site.phone.href} className="link-slide inline-block py-2 text-lg font-bold">
                 {site.phone.display}
               </a>
-              <a href={site.links.yandexOrg} target="_blank" rel="noopener" className="link-slide block py-1">
+              <a href={site.links.yandexOrg} target="_blank" rel="noopener" className="link-slide block py-2">
                 {site.address.city}, {site.address.street}, {site.address.details}
               </a>
               <p className="text-milk/70">

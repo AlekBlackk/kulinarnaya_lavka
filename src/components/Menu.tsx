@@ -84,7 +84,7 @@ export function Menu() {
                 type="button"
                 aria-pressed={view === id}
                 onClick={() => setView(id)}
-                className={`inline-flex h-9 items-center gap-2 rounded-full px-4 text-sm font-semibold transition-colors ${
+                className={`inline-flex h-11 items-center gap-2 rounded-full px-4 text-sm font-semibold transition-colors ${
                   view === id ? "bg-coffee text-milk" : "text-coffee-soft hover:bg-cream"
                 }`}
               >

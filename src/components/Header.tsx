@@ -114,11 +114,11 @@ export function Header() {
           <a
             href={site.phone.href}
             aria-label={`Позвонить: ${site.phone.display}`}
-            className="call-btn group flex h-11 items-center gap-2 rounded-full bg-terracotta px-3.5 min-[380px]:px-4 text-sm font-bold text-white transition hover:bg-coffee active:scale-[0.97]"
+            className="call-btn group flex h-11 items-center gap-2 rounded-full bg-terracotta px-3.5 sm:px-4 text-sm font-bold text-white transition hover:bg-coffee active:scale-[0.97]"
           >
             <PhoneIcon width={18} height={18} className="group-hover:animate-[ring_0.6s_ease-in-out]" />
             <span className="hidden whitespace-nowrap lg:inline">{site.phone.display}</span>
-            <span className="hidden min-[380px]:inline lg:hidden">Позвонить</span>
+            <span className="hidden sm:inline lg:hidden">Позвонить</span>
           </a>
           <button
             type="button"

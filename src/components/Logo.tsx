@@ -5,7 +5,7 @@ export function Logo({ light = false }: { light?: boolean }) {
   return (
     <a href="#top" className="group flex min-w-0 items-center gap-2 min-[360px]:gap-2.5" aria-label="Кулинарная лавка & bistro — наверх">
       <span
-        className={`flex size-9 shrink-0 items-center min-[360px]:size-10 justify-center rounded-full transition-transform group-hover:-rotate-12 ${
+        className={`hidden size-9 shrink-0 items-center min-[340px]:flex min-[360px]:size-10 justify-center rounded-full transition-transform group-hover:-rotate-12 ${
           light ? "bg-cream text-terracotta" : "bg-terracotta text-milk"
         }`}
       >

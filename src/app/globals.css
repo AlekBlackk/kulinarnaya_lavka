@@ -401,7 +401,8 @@ dialog::backdrop {
 
 /* Подвал: ссылки с «выезжающим» подчёркиванием, контурная вывеска, вращающаяся надпись «Наверх». */
 .link-slide {
-  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  /* подчёркивание на 0.45rem выше низа: у ссылок есть вертикальные поля под удобное нажатие */
+  background: linear-gradient(currentColor, currentColor) 0 calc(100% - 0.45rem) / 0 1px no-repeat;
   transition: background-size 0.3s ease;
 }
 .link-slide:hover,
