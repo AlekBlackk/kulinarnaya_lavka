@@ -1,27 +1,124 @@
 import { site } from "@/config/site";
 
+type IconName = (typeof site.advantages)[number]["icon"];
+
+// Контурные иконки: каждый штрих помечен .draw и «дорисовывается» при прокрутке (см. globals.css).
+const icons: Record<IconName, React.ReactNode> = {
+  eye: (
+    <>
+      <path className="draw" pathLength="1" d="M4 24C12 12 36 12 44 24C36 36 12 36 4 24Z" />
+      <circle className="draw" pathLength="1" cx="24" cy="24" r="6" />
+    </>
+  ),
+  plate: (
+    <>
+      <circle className="draw" pathLength="1" cx="24" cy="26" r="17" />
+      <circle className="draw" pathLength="1" cx="24" cy="26" r="10" />
+      <path className="draw" pathLength="1" d="M18 8c-2-2 2-3 0-6M26 8c-2-2 2-3 0-6" />
+    </>
+  ),
+  bag: (
+    <>
+      <path className="draw" pathLength="1" d="M10 16H38L40 43H8Z" />
+      <path className="draw" pathLength="1" d="M18 16V12a6 6 0 0 1 12 0V16" />
+    </>
+  ),
+  clock: (
+    <>
+      <circle className="draw" pathLength="1" cx="24" cy="24" r="18" />
+      <path className="draw" pathLength="1" d="M24 13V24L31 28" />
+    </>
+  ),
+};
+
+// Смещения и наклоны карточек-«записок»: на широком экране они лежат вразнобой, как бумажки на доске.
+const notePose = [
+  "rotate-[-2deg] lg:mt-0",
+  "rotate-[1.5deg] lg:mt-10",
+  "rotate-[-1deg] lg:mt-4",
+  "rotate-[2deg] lg:mt-14",
+];
+
+const marquee = ["домашняя кухня", "супы", "горячее", "гарниры", "салаты", "выпечка", "еда с собой", "кофе с собой"];
+
 export function Advantages() {
   return (
-    <section id="about" aria-labelledby="about-title" className="scroll-mt-16 bg-coffee py-16 text-milk sm:py-24">
+    <section id="about" aria-labelledby="about-title" className="scroll-mt-16 overflow-hidden bg-coffee pt-16 text-milk sm:pt-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="reveal max-w-2xl">
           <p className="font-hand text-2xl text-terracotta-soft">почему к нам заходят</p>
           <h2 id="about-title" className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
-            Обед, который не нужно планировать
+            Обед, который{" "}
+            <span className="relative inline-block">
+              <em className="font-semibold text-terracotta-soft">не нужно</em>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 200 12"
+                preserveAspectRatio="none"
+                className="absolute -bottom-1 left-0 h-2.5 w-full overflow-visible text-milk/70"
+              >
+                <path
+                  className="scribble scribble-view"
+                  pathLength="1"
+                  d="M2 7C40 2 70 11 105 6S170 3 198 7"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>{" "}
+            планировать
           </h2>
         </div>
 
-        <ol className="mt-12 grid gap-px overflow-hidden rounded-3xl bg-milk/10 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="mt-14 grid gap-8 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4">
           {site.advantages.map((item, index) => (
-            <li key={item.title} className="reveal bg-coffee p-6 transition-colors hover:bg-coffee-soft sm:p-8">
-              <span className="font-display text-5xl font-bold italic text-terracotta-soft/80">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-4 font-display text-2xl font-semibold">{item.title}</h3>
-              <p className="mt-3 leading-relaxed text-milk/75">{item.text}</p>
+            <li
+              key={item.title}
+              className={`note reveal relative rounded-2xl bg-milk p-6 pt-8 text-coffee shadow-[0_18px_30px_-18px_rgb(0_0_0/0.7)] transition-[rotate,translate,box-shadow] duration-300 hover:-translate-y-2 hover:rotate-0 hover:shadow-[0_26px_36px_-18px_rgb(0_0_0/0.8)] ${notePose[index % notePose.length]}`}
+            >
+              <span aria-hidden="true" className="absolute -top-3 left-1/2 h-6 w-20 -translate-x-1/2 -rotate-3 bg-cream-deep/90 shadow-sm" />
+              <div className="flex items-start justify-between">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 48 48"
+                  width="56"
+                  height="56"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-terracotta"
+                >
+                  {icons[item.icon]}
+                </svg>
+                <span aria-hidden="true" className="font-hand text-5xl leading-none text-terracotta-soft">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <h3 className="mt-5 font-display text-2xl font-semibold leading-snug">{item.title}</h3>
+              <p className="mt-3 leading-relaxed text-muted">{item.text}</p>
             </li>
           ))}
         </ol>
+      </div>
+
+      {/* Бегущая лента вдоль низа секции; для скринридеров скрыта — это декор. */}
+      <div aria-hidden="true" className="mt-20 border-y border-milk/10 py-4 sm:mt-28">
+        <div className="marquee-track flex w-max items-center font-display text-2xl italic text-milk/35 sm:text-3xl">
+          {[0, 1].map((copy) => (
+            <div key={copy} className="flex shrink-0 items-center">
+              {marquee.map((word) => (
+                <span key={word} className="flex items-center">
+                  {word}
+                  <span className="mx-6 inline-block size-2 rotate-45 bg-terracotta-soft/70" />
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

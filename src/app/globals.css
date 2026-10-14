@@ -290,3 +290,28 @@ dialog::backdrop {
     }
   }
 }
+
+/* Иконки в карточках «Почему к нам» дорисовываются, пока карточка въезжает в экран. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .draw {
+      stroke-dasharray: 1;
+      animation: scribble linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 80%;
+    }
+  }
+}
+
+/* Бегущая лента: контент продублирован, поэтому сдвиг на половину ширины даёт бесшовный цикл. */
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: marquee 40s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
