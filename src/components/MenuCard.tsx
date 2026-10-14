@@ -33,7 +33,7 @@ export function MenuCard({ item, onOpen }: { item: MenuItem; onOpen: (item: Menu
           </button>
         </h3>
         <p className="mt-1 flex-1 text-sm leading-relaxed text-muted sm:mt-1.5 sm:text-[15px]">{item.description}</p>
-        <p className="mt-3 origin-left self-start rounded-full transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105 bg-cream px-3.5 py-1 font-display text-lg font-bold text-terracotta sm:mt-4 sm:px-4 sm:py-1.5">
+        <p className="price-tag mt-3 origin-left self-start transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105 bg-cream py-1 pl-7 pr-4 font-display text-lg font-bold text-terracotta sm:mt-4 sm:py-1.5">
           {formatPrice(item.price)}
         </p>
       </div>

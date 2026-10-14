@@ -2,12 +2,15 @@
 
 import { useRef, useState } from "react";
 import { menuCategories, menuItems, type MenuCategoryId, type MenuItem } from "@/data/menu";
+import { site } from "@/config/site";
 import { DishDialog } from "./DishDialog";
 import { MenuCategories } from "./MenuCategories";
 import { MenuGrid } from "./MenuGrid";
 
 // Используются только категории, в которых есть блюда, — пустых вкладок не будет.
-const categories = menuCategories.filter((c) => menuItems.some((item) => item.category === c.id));
+const categories = menuCategories
+  .map((c) => ({ ...c, count: menuItems.filter((item) => item.category === c.id).length }))
+  .filter((c) => c.count > 0);
 
 export function Menu() {
   const [active, setActive] = useState<MenuCategoryId>(categories[0].id);
@@ -30,12 +33,33 @@ export function Menu() {
           <div>
             <p className="font-hand text-2xl text-terracotta">что сегодня на обед</p>
             <h2 id="menu-title" className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
-              Наше меню
+              Наше{" "}
+              <span className="relative inline-block text-terracotta">
+                <em className="font-semibold">меню</em>
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 120 12"
+                  preserveAspectRatio="none"
+                  className="absolute -bottom-1 left-0 h-2.5 w-full overflow-visible text-terracotta-soft"
+                >
+                  <path
+                    className="scribble scribble-view"
+                    pathLength="1"
+                    d="M2 7 C 25 2, 45 10, 68 5 S 105 3, 118 6"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
             </h2>
           </div>
-          <p className="max-w-md text-muted">
-            Выбирайте по категориям: первое, горячее, гарнир — и что-нибудь к чаю.
-          </p>
+          <ul className="flex flex-wrap gap-2 text-sm font-semibold text-coffee-soft">
+            <li className="rounded-full border border-line bg-milk px-3.5 py-1.5">Средний чек {site.averageCheck}</li>
+            <li className="rounded-full border border-line bg-milk px-3.5 py-1.5">Еда навынос</li>
+            <li className="rounded-full border border-line bg-milk px-3.5 py-1.5">Кофе с собой</li>
+          </ul>
         </div>
 
         <div className="sticky top-16 z-20 -mx-4 mt-8 bg-cream/95 px-4 py-3 backdrop-blur sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:backdrop-blur-none">
