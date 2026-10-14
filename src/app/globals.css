@@ -469,3 +469,21 @@ dialog::backdrop {
     scale: 1.08;
   }
 }
+
+/* Булавка на наклейке «мы здесь!» подпрыгивает, как метка на карте. */
+@media (prefers-reduced-motion: no-preference) {
+  .pin-bounce {
+    animation: pin-bounce 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes pin-bounce {
+  0%,
+  60%,
+  100% {
+    translate: 0 0;
+  }
+  30% {
+    translate: 0 -5px;
+  }
+}

@@ -1,6 +1,7 @@
 import { site } from "@/config/site";
 import { CopyButton } from "./CopyButton";
-import { ExternalIcon, PhoneIcon, RouteIcon } from "./icons";
+import { ExternalIcon, PhoneIcon, PinIcon, RouteIcon } from "./icons";
+import { OpenNow } from "./OpenNow";
 import { WeekStrip } from "./WeekStrip";
 
 // Одна строка «чека»: подпись, пунктирный выравниватель и значение.
@@ -52,6 +53,9 @@ export function Location() {
               <p className="mt-1 text-center font-mono text-xs uppercase tracking-[0.2em] text-muted">
                 чек гостя · {site.address.city}
               </p>
+              <div className="mt-4">
+                <OpenNow />
+              </div>
 
               <div className="my-5 border-t-2 border-dashed border-coffee/20" />
 
@@ -144,6 +148,22 @@ export function Location() {
 
         {/* Карта в рамке-открытке: чуть наклонена, «приклеена» скотчем. */}
         <div className="reveal relative lg:pt-16">
+          {/* Пунктирный путь «к нам» над картой — декор, только на широком экране. */}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 400 60"
+            fill="none"
+            className="absolute -left-10 top-0 hidden h-16 w-[calc(100%+2.5rem)] text-terracotta-soft lg:block"
+          >
+            <path
+              pathLength="1"
+              d="M4 50C70 8 140 58 210 30S330 6 392 40"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeDasharray="0.012 0.018"
+            />
+          </svg>
           <div className="relative h-full min-h-[380px] rotate-1 rounded-3xl bg-white p-3 shadow-[0_24px_40px_-24px_rgb(47_33_27/0.5)]">
             <span aria-hidden="true" className="absolute -top-3 left-1/2 z-10 h-6 w-24 -translate-x-1/2 -rotate-2 bg-cream-deep/90 shadow-sm" />
             <iframe
@@ -155,8 +175,9 @@ export function Location() {
             />
             <p
               aria-hidden="true"
-              className="pointer-events-none absolute -bottom-5 left-6 -rotate-3 rounded-full bg-terracotta px-4 py-1.5 font-hand text-2xl text-white shadow-lg"
+              className="pointer-events-none absolute -bottom-5 right-6 flex rotate-3 items-center gap-1.5 rounded-full bg-terracotta py-1.5 pl-3 pr-4 font-hand text-2xl text-white shadow-lg"
             >
+              <PinIcon width={20} height={20} className="pin-bounce" />
               мы здесь!
             </p>
           </div>
