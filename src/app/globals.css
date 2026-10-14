@@ -191,3 +191,73 @@ dialog::backdrop {
     rotate: 18deg;
   }
 }
+
+/* Заголовок первого экрана: слова выезжают по очереди, «обеды» подчёркивается от руки. */
+.word {
+  display: inline-block;
+}
+
+.rotator {
+  display: inline-grid;
+}
+.rotator > span {
+  grid-area: 1 / 1;
+}
+.rotator > span:not(:first-child) {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .word {
+    animation: word-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 90ms + 150ms);
+  }
+
+  .scribble {
+    stroke-dasharray: 1;
+    animation: scribble 0.9s ease-out both;
+    animation-delay: 1s;
+  }
+
+  .rotator > span:not(:first-child) {
+    display: block;
+  }
+  .rotator > span {
+    opacity: 0;
+    animation: rotate-word 9s ease-in-out infinite;
+    animation-delay: calc(var(--i, 0) * 3s + 1.2s);
+  }
+}
+
+@keyframes word-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em) rotate(2deg);
+  }
+}
+
+@keyframes scribble {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes rotate-word {
+  0% {
+    opacity: 0;
+    transform: translateY(60%);
+  }
+  6%,
+  30% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  36%,
+  100% {
+    opacity: 0;
+    transform: translateY(-60%);
+  }
+}

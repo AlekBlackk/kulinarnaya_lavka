@@ -14,13 +14,48 @@ export function Hero() {
             Кафе домашней кухни в Тамбове
           </p>
 
-          <h1 className="mt-5 font-display text-[2.6rem] font-bold leading-[1.02] tracking-tight text-coffee min-[400px]:text-5xl sm:text-6xl xl:text-[4.25rem]">
-            Вкусные <em className="font-semibold text-terracotta">обеды</em>
+          <h1 className="mt-5 font-display text-[2.1rem] font-bold leading-[1.02] min-[360px]:text-[2.6rem] tracking-tight text-coffee min-[400px]:text-5xl sm:text-6xl xl:text-[4.25rem]">
+            <span className="word" style={{ "--i": 0 } as React.CSSProperties}>Вкусные</span>{" "}
+            <span className="word relative" style={{ "--i": 1 } as React.CSSProperties}>
+              <em className="font-semibold text-terracotta">обеды</em>
+              {/* Подчёркивание «рисуется» от руки; без анимации просто остаётся линией. */}
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 200 14"
+                preserveAspectRatio="none"
+                className="absolute -bottom-1 left-0 h-3 w-full overflow-visible text-terracotta-soft"
+              >
+                <path
+                  className="scribble"
+                  pathLength="1"
+                  d="M3 9 C 38 2, 70 12, 104 6 S 168 3, 197 8"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
             <br />
-            на каждый день
+            <span className="word" style={{ "--i": 2 } as React.CSSProperties}>на</span>{" "}
+            <span className="word" style={{ "--i": 3 } as React.CSSProperties}>каждый</span>{" "}
+            <span className="word" style={{ "--i": 4 } as React.CSSProperties}>день</span>
           </h1>
 
-          <p className="mt-4 max-w-lg text-base leading-relaxed text-muted sm:mt-5 sm:text-lg">
+          <p className="mt-3 flex flex-wrap items-center gap-x-2 font-hand text-2xl leading-tight text-terracotta sm:text-[1.7rem]">
+            <svg aria-hidden="true" viewBox="0 0 40 24" width="36" height="22" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M2 4c10 0 18 6 20 14M22 18l-7-3M22 18l2-8" />
+            </svg>
+            <span>Заходите</span>
+            {/* Три подписи сменяют друг друга; при reduced motion остаётся первая. */}
+            <span className="rotator">
+              <span style={{ "--i": 0 } as React.CSSProperties}>в обеденный перерыв</span>
+              <span style={{ "--i": 1 } as React.CSSProperties}>пообедать на месте</span>
+              <span style={{ "--i": 2 } as React.CSSProperties}>за едой с собой</span>
+            </span>
+          </p>
+
+          <p className="mt-4 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
             Супы, горячее, гарниры, салаты и выпечка — как дома. Пообедайте у нас или возьмите еду с собой.
           </p>
 
