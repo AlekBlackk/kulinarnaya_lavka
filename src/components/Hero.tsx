@@ -1,5 +1,6 @@
 import { site } from "@/config/site";
 import { HeroSlides } from "./HeroSlides";
+import { OpenNow } from "./OpenNow";
 import { ArrowIcon, ClockIcon, PhoneIcon, PinIcon } from "./icons";
 
 export function Hero() {
@@ -16,7 +17,10 @@ export function Hero() {
             Кафе домашней кухни в Тамбове
           </p>
 
-          <h1 className="mt-5 font-display text-[2.1rem] font-bold leading-[1.02] min-[360px]:text-[2.6rem] tracking-tight text-coffee min-[400px]:text-5xl sm:text-6xl xl:text-[4.25rem]">
+          {/* Место под статус занято заранее, чтобы заголовок не прыгал, когда статус посчитается в браузере. */}
+          <OpenNow className="mt-2 justify-start" />
+
+          <h1 className="mt-3 font-display text-[2.1rem] font-bold leading-[1.02] min-[360px]:text-[2.6rem] tracking-tight text-coffee min-[400px]:text-5xl sm:text-6xl xl:text-[4.25rem]">
             <span className="word" style={{ "--i": 0 } as React.CSSProperties}>Вкусные</span>{" "}
             <span className="word relative" style={{ "--i": 1 } as React.CSSProperties}>
               <em className="font-semibold text-terracotta">обеды</em>

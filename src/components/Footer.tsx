@@ -98,12 +98,16 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Огромная вывеска на всю ширину: чистый декор. */}
+      {/* Огромная вывеска на всю ширину: при наведении буквы по очереди «зажигаются» и подпрыгивают. Чистый декор. */}
       <p
         aria-hidden="true"
-        className="wordmark reveal mt-6 select-none pb-[0.3em] whitespace-nowrap text-center font-display text-[10.5vw] font-bold italic leading-[1.05]"
+        className="reveal mt-6 select-none whitespace-nowrap pb-[0.3em] text-center font-display text-[10.5vw] font-bold italic leading-[1.05]"
       >
-        Кулинарная лавка
+        {[..."Кулинарная лавка"].map((char, i) => (
+          <span key={i} className="wm-letter">
+            {char === " " ? " " : char}
+          </span>
+        ))}
       </p>
 
       <div className="border-t border-milk/10">

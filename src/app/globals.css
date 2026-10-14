@@ -366,12 +366,38 @@ dialog::backdrop {
   background-size: 100% 1px;
 }
 
-/* Заливка градиентом, а не контур: у контура на перекрывающихся штрихах шрифта видны артефакты. */
-.wordmark {
+/* Вывеска в подвале. Заливка градиентом, а не контур: у контура на перекрывающихся штрихах шрифта видны артефакты.
+   Градиент двойной высоты: при наведении он сдвигается, и буква окрашивается в терракотовый. */
+.wm-letter {
+  display: inline-block;
+  /* Запас снизу, чтобы коробка буквы охватывала выносные элементы («у», «р») и фон их не обрезал. */
+  padding-bottom: 0.25em;
+  margin-bottom: -0.25em;
   color: transparent;
-  background: linear-gradient(180deg, rgb(251 246 238 / 0.2), rgb(251 246 238 / 0.04) 85%);
+  background: linear-gradient(
+    180deg,
+    rgb(251 246 238 / 0.2),
+    rgb(251 246 238 / 0.04) 47%,
+    rgb(208 120 79 / 0.95) 53%,
+    rgb(208 120 79 / 0.5) 100%
+  );
+  background-size: 100% 200%;
   -webkit-background-clip: text;
   background-clip: text;
+  transition: background-position 0.4s ease;
+}
+.wm-letter:hover {
+  background-position: 0 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .wm-letter {
+    transition:
+      background-position 0.4s ease,
+      transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .wm-letter:hover {
+    transform: translateY(-0.07em);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

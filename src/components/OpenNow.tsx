@@ -13,12 +13,12 @@ const getSnapshot = () => JSON.stringify(getOpenStatus(new Date()));
 
 // Живой статус «открыто/закрыто». В статической сборке его нет (зависит от текущего времени),
 // поэтому до загрузки скрипта место просто зарезервировано.
-export function OpenNow() {
+export function OpenNow({ className = "justify-center" }: { className?: string }) {
   const snapshot = useSyncExternalStore(subscribe, getSnapshot, () => null);
   const status = snapshot ? (JSON.parse(snapshot) as ReturnType<typeof getOpenStatus>) : null;
 
   return (
-    <p className="flex min-h-9 justify-center" role="status">
+    <p className={`flex min-h-9 ${className}`} role="status">
       {status && (
         <span
           className={`fade-in inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-bold ${
