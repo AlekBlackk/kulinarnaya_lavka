@@ -71,6 +71,11 @@ export function Hero() {
               sizes="(min-width: 1024px) 480px, (min-width: 448px) 448px, 100vw"
               preload
             />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+              <span className="steam left-[28%]" />
+              <span className="steam left-[48%] [animation-delay:1.4s]" />
+              <span className="steam left-[66%] [animation-delay:2.6s]" />
+            </div>
             {site.heroImage.illustrative && (
               <span className="absolute bottom-3 right-4 text-xs font-medium text-white/85 drop-shadow">
                 иллюстративное фото
@@ -78,7 +83,7 @@ export function Hero() {
             )}
           </div>
 
-          <div className="absolute -left-2 top-[12%] flex size-28 -rotate-[10deg] flex-col items-center justify-center rounded-full bg-olive text-center text-milk shadow-lg sm:-left-6 sm:size-32">
+          <div className="sticker absolute -left-2 top-[12%] flex size-28 -rotate-[10deg] flex-col items-center justify-center rounded-full bg-olive text-center text-milk shadow-lg sm:-left-6 sm:size-32">
             <span className="text-[11px] font-semibold uppercase tracking-wider opacity-80">средний чек</span>
             <span className="font-display text-xl font-bold leading-tight sm:text-2xl">{site.averageCheck}</span>
             <span className="text-[10px] opacity-75">по Яндекс Картам</span>

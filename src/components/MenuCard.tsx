@@ -4,9 +4,9 @@ import { FoodImage } from "./FoodImage";
 
 // На телефоне карточка горизонтальная (фото слева), чтобы меню листалось быстро;
 // с 640px — вертикальная с крупным фото.
-export function MenuCard({ item }: { item: MenuItem }) {
+export function MenuCard({ item, onOpen }: { item: MenuItem; onOpen: (item: MenuItem) => void }) {
   return (
-    <article className="group flex h-full overflow-hidden rounded-3xl border border-line bg-white/70 transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-24px_rgba(47,33,27,0.45)] sm:flex-col">
+    <article className="group relative flex has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-olive h-full overflow-hidden rounded-3xl border border-line bg-white/70 transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-24px_rgba(47,33,27,0.45)] sm:flex-col">
       <div className="relative min-h-32 w-28 shrink-0 overflow-hidden bg-cream min-[400px]:w-32 sm:aspect-[4/3] sm:min-h-0 sm:w-auto">
         <FoodImage
           src={item.image}
@@ -21,9 +21,19 @@ export function MenuCard({ item }: { item: MenuItem }) {
         )}
       </div>
       <div className="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
-        <h3 className="font-display text-lg font-semibold leading-snug text-coffee sm:text-xl">{item.name}</h3>
+        <h3 className="font-display text-lg font-semibold leading-snug text-coffee sm:text-xl">
+          {/* Растянутая кнопка: вся карточка кликабельна, а для скринридера это обычная кнопка с названием блюда. */}
+          <button
+            type="button"
+            onClick={() => onOpen(item)}
+            aria-haspopup="dialog"
+            className="cursor-pointer text-left outline-none after:absolute after:inset-0"
+          >
+            {item.name}
+          </button>
+        </h3>
         <p className="mt-1 flex-1 text-sm leading-relaxed text-muted sm:mt-1.5 sm:text-[15px]">{item.description}</p>
-        <p className="mt-3 self-start rounded-full bg-cream px-3.5 py-1 font-display text-lg font-bold text-terracotta sm:mt-4 sm:px-4 sm:py-1.5">
+        <p className="mt-3 origin-left self-start rounded-full transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105 bg-cream px-3.5 py-1 font-display text-lg font-bold text-terracotta sm:mt-4 sm:px-4 sm:py-1.5">
           {formatPrice(item.price)}
         </p>
       </div>
