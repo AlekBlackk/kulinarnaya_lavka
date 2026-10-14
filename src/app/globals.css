@@ -315,3 +315,23 @@ dialog::backdrop {
     transform: translateX(-50%);
   }
 }
+
+/* Parallax в галерее: рамка «обрезает» фото, а оно медленно смещается, пока плитка проходит через экран. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .parallax {
+      animation: parallax linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+  }
+}
+
+@keyframes parallax {
+  from {
+    transform: translateY(-5%);
+  }
+  to {
+    transform: translateY(5%);
+  }
+}

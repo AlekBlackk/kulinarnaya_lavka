@@ -88,3 +88,10 @@ export const BowlIcon = (p: P) => (
     <path d="M9 8c-1-1 0-2 0-3M12 8c-1-1 0-2 0-3M15 8c-1-1 0-2 0-3" />
   </Icon>
 );
+
+export const ZoomIcon = (p: P) => (
+  <Icon {...p}>
+    <circle cx="11" cy="11" r="6.5" />
+    <path d="M16 16l5 5M11 8.5v5M8.5 11h5" />
+  </Icon>
+);
