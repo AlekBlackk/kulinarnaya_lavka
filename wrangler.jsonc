@@ -1,0 +1,7 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "kulinarnaya-lavka",
+  "compatibility_date": "2026-10-12",
+  // Сайт собирается как статика (next.config.ts: output "export"), поэтому отдаём папку out/ как есть.
+  "assets": { "directory": "./out" }
+}
