@@ -72,7 +72,6 @@ body {
   flex: 0 0 32px;
   height: 30px;
   border-radius: 0 0 16px 16px / 0 0 14px 14px;
-  transform-origin: top center;
   background:
     linear-gradient(90deg, rgb(47 33 27 / 0.16), transparent 24%, transparent 76%, rgb(47 33 27 / 0.16)),
     linear-gradient(180deg, rgb(255 255 255 / 0.25), transparent 42%, rgb(47 33 27 / 0.16)),
@@ -154,10 +153,11 @@ dialog::backdrop {
     animation: awning-drop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   }
 
-  /* Лёгкое колыхание: каждый фестон качается чуть позже соседа, по полотну идёт волна. */
-  .awning-panels span {
+  /* Лёгкое колыхание: полотно целиком чуть «косится» из стороны в сторону, верх остаётся у планки.
+     Анимируется один элемент, а не 80 фестонов — так дешевле для основного потока. */
+  .awning-panels {
+    transform-origin: top center;
     animation: awning-sway 4.5s ease-in-out infinite alternate;
-    animation-delay: calc(var(--i, 0) * -0.14s);
   }
 
   .pop {
@@ -562,9 +562,9 @@ dialog::backdrop {
 
 @keyframes awning-sway {
   from {
-    rotate: -1.6deg;
+    transform: skewX(-4deg);
   }
   to {
-    rotate: 1.6deg;
+    transform: skewX(4deg);
   }
 }

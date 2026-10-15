@@ -1,5 +1,5 @@
 // Полосатая маркиза «лавки»: планка с прострочкой сверху и свисающие фестоны с объёмом ткани.
-// Фестоны — отдельные элементы, чтобы при прокрутке они легко «колыхались» волной (см. globals.css).
+// Фестоны — отдельные элементы: у каждого своя фактура ткани и чередующийся цвет (см. globals.css).
 // 80 штук по 32px хватает на экран шириной 2560px; лишнее скрыто по ширине контейнера.
 const PANELS = 80;
 
@@ -9,7 +9,7 @@ export function Awning() {
       <div className="awning-trim" />
       <div className="awning-panels">
         {Array.from({ length: PANELS }, (_, i) => (
-          <span key={i} style={{ "--i": i } as React.CSSProperties} />
+          <span key={i} />
         ))}
       </div>
     </div>

@@ -139,15 +139,9 @@ export function Footer() {
       </p>
 
       <div className="border-t border-milk/10">
-        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-sm text-milk/55 sm:px-6 md:flex-row md:justify-between">
+        <div className="mx-auto max-w-6xl px-4 py-6 text-sm text-milk/55 sm:px-6">
           <p>
             © {new Date().getFullYear()} {site.name}. Все права защищены.
-          </p>
-          <p>
-            Иллюстративные фото блюд —{" "}
-            <a href="https://unsplash.com" target="_blank" rel="noopener" className="underline underline-offset-2 hover:text-milk">
-              Unsplash
-            </a>
           </p>
         </div>
       </div>

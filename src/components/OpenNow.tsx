@@ -18,7 +18,8 @@ export function OpenNow({ className = "justify-center" }: { className?: string }
   const status = snapshot ? (JSON.parse(snapshot) as ReturnType<typeof getOpenStatus>) : null;
 
   return (
-    <p className={`flex min-h-9 ${className}`} role="status">
+    // Без role="status": текст меняется каждую минуту, и скринридер зачитывал бы его снова и снова.
+    <p className={`flex min-h-9 ${className}`}>
       {status && (
         <span
           className={`fade-in inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-bold ${

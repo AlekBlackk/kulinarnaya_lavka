@@ -61,7 +61,7 @@ export function MenuCategories({ options, active, onChange }: Props) {
             onClick={() => onChange(option.id)}
             className={`relative flex h-11 shrink-0 items-center gap-1.5 rounded-full border px-4 text-[15px] font-semibold transition-colors duration-200 active:scale-[0.97] ${
               isActive
-                ? "border-transparent text-milk"
+                ? `border-transparent text-milk ${pill ? "" : "bg-coffee"}` // до измерения плашки (и без JS) фон рисует сама вкладка
                 : "border-line bg-white/60 text-coffee-soft hover:border-coffee/40 hover:bg-white"
             }`}
           >
