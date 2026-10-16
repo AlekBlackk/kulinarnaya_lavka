@@ -28,7 +28,7 @@ export const menuCategories: { id: MenuCategoryId; label: string }[] = [
   { id: "drinks", label: "Напитки" },
 ];
 
-const unsplash = (id: string) => `https://images.unsplash.com/photo-${id}`;
+const photo = (id: string) => `/photos/${id}.jpg`;
 
 export const menuItems: MenuItem[] = [
   {
@@ -37,7 +37,7 @@ export const menuItems: MenuItem[] = [
     name: "Борщ со сметаной",
     description: "Густой свекольный суп, подаётся со сметаной и зеленью.",
     price: 140,
-    image: unsplash("1648726445011-9fbf3a5ddb90"),
+    image: photo("1648726445011-9fbf3a5ddb90"),
     demo: true,
   },
   {
@@ -46,7 +46,7 @@ export const menuItems: MenuItem[] = [
     name: "Грибной суп-пюре",
     description: "Нежный крем-суп из грибов.",
     price: 150,
-    image: unsplash("1659603851579-17755833517e"),
+    image: photo("1659603851579-17755833517e"),
     demo: true,
   },
   {
@@ -55,7 +55,7 @@ export const menuItems: MenuItem[] = [
     name: "Овощной суп",
     description: "Лёгкий прозрачный суп с овощами.",
     price: 110,
-    image: unsplash("1612966948332-81d747414a8f"),
+    image: photo("1612966948332-81d747414a8f"),
     demo: true,
   },
   {
@@ -64,7 +64,7 @@ export const menuItems: MenuItem[] = [
     name: "Котлета домашняя",
     description: "Румяная мясная котлета — хорошо с пюре или гречкой.",
     price: 120,
-    image: unsplash("1736170379419-808d2f05b93c"),
+    image: photo("1736170379419-808d2f05b93c"),
     demo: true,
   },
   {
@@ -73,7 +73,7 @@ export const menuItems: MenuItem[] = [
     name: "Тефтели в томатном соусе",
     description: "Мягкие тефтели, тушённые в томатном соусе.",
     price: 140,
-    image: unsplash("1787261534727-b9c89aa2bb11"),
+    image: photo("1787261534727-b9c89aa2bb11"),
     demo: true,
   },
   {
@@ -82,7 +82,7 @@ export const menuItems: MenuItem[] = [
     name: "Гуляш с картофельным пюре",
     description: "Тушёное мясо с густой подливкой и пюре.",
     price: 210,
-    image: unsplash("1723511413901-99439b957bbf"),
+    image: photo("1723511413901-99439b957bbf"),
     demo: true,
   },
   {
@@ -91,7 +91,7 @@ export const menuItems: MenuItem[] = [
     name: "Курица запечённая",
     description: "Кусочки курицы, запечённые до золотистой корочки.",
     price: 160,
-    image: unsplash("1642689690500-f429a042cad1"),
+    image: photo("1642689690500-f429a042cad1"),
     demo: true,
   },
   {
@@ -100,7 +100,7 @@ export const menuItems: MenuItem[] = [
     name: "Отбивная в панировке",
     description: "Тонкая отбивная в хрустящей панировке.",
     price: 180,
-    image: unsplash("1775889325293-fd23980169bf"),
+    image: photo("1775889325293-fd23980169bf"),
     demo: true,
   },
   {
@@ -109,7 +109,7 @@ export const menuItems: MenuItem[] = [
     name: "Картофельное пюре",
     description: "Воздушное пюре, как дома.",
     price: 70,
-    image: unsplash("1707616954324-99c89a78a20d"),
+    image: photo("1707616954324-99c89a78a20d"),
     demo: true,
   },
   {
@@ -118,7 +118,7 @@ export const menuItems: MenuItem[] = [
     name: "Гречка",
     description: "Рассыпчатая гречневая каша.",
     price: 60,
-    image: unsplash("1671731478749-047201d3278e"),
+    image: photo("1671731478749-047201d3278e"),
     demo: true,
   },
   {
@@ -127,7 +127,7 @@ export const menuItems: MenuItem[] = [
     name: "Рис с овощами",
     description: "Рис с зелёным горошком и морковью.",
     price: 70,
-    image: unsplash("1664717698774-84f62382613b"),
+    image: photo("1664717698774-84f62382613b"),
     demo: true,
   },
   {
@@ -136,7 +136,7 @@ export const menuItems: MenuItem[] = [
     name: "Салат «Цезарь»",
     description: "Листья салата, сухарики и соус.",
     price: 180,
-    image: unsplash("1746211108786-ca20c8f80ecd"),
+    image: photo("1746211108786-ca20c8f80ecd"),
     demo: true,
   },
   {
@@ -145,7 +145,7 @@ export const menuItems: MenuItem[] = [
     name: "Салат из свежих овощей",
     description: "Сезонные овощи и зелень.",
     price: 110,
-    image: unsplash("1611171711925-92171c63fc4b"),
+    image: photo("1611171711925-92171c63fc4b"),
     demo: true,
   },
   {
@@ -154,7 +154,7 @@ export const menuItems: MenuItem[] = [
     name: "Салат из свежей капусты",
     description: "Хрустящая капуста с морковью.",
     price: 70,
-    image: unsplash("1654458804670-2f4f26ab3154"),
+    image: photo("1654458804670-2f4f26ab3154"),
     demo: true,
   },
   {
@@ -163,7 +163,7 @@ export const menuItems: MenuItem[] = [
     name: "Пирожки печёные",
     description: "Сдобные пирожки с разными начинками.",
     price: 55,
-    image: unsplash("1702742136812-d6f9de6df0cf"),
+    image: photo("1702742136812-d6f9de6df0cf"),
     demo: true,
   },
   {
@@ -172,7 +172,7 @@ export const menuItems: MenuItem[] = [
     name: "Осетинский пирог",
     description: "Тонкое тесто и щедрая начинка, порционный кусок.",
     price: 120,
-    image: unsplash("1692780941305-b93b13fb87b4"),
+    image: photo("1692780941305-b93b13fb87b4"),
     demo: true,
   },
   {
@@ -181,7 +181,7 @@ export const menuItems: MenuItem[] = [
     name: "Слойки",
     description: "Хрустящая слоёная выпечка к чаю или кофе.",
     price: 65,
-    image: unsplash("1483695028939-5bb13f8648b0"),
+    image: photo("1483695028939-5bb13f8648b0"),
     demo: true,
   },
   {
@@ -190,7 +190,7 @@ export const menuItems: MenuItem[] = [
     name: "Оладьи с ягодами",
     description: "Пышные оладьи со свежими ягодами.",
     price: 130,
-    image: unsplash("1693422662014-cfd9a489e2af"),
+    image: photo("1693422662014-cfd9a489e2af"),
     demo: true,
   },
   {
@@ -199,7 +199,7 @@ export const menuItems: MenuItem[] = [
     name: "Творожная запеканка",
     description: "Нежная запеканка — на десерт или на завтрак.",
     price: 110,
-    image: unsplash("1733713642547-43599b17c094"),
+    image: photo("1733713642547-43599b17c094"),
     demo: true,
   },
   {
@@ -208,7 +208,7 @@ export const menuItems: MenuItem[] = [
     name: "Компот",
     description: "Домашний ягодный компот.",
     price: 50,
-    image: unsplash("1722239315387-5f12ffdf22c0"),
+    image: photo("1722239315387-5f12ffdf22c0"),
     demo: true,
   },
   {
@@ -217,7 +217,7 @@ export const menuItems: MenuItem[] = [
     name: "Чай чёрный",
     description: "Горячий чай в чашке или с собой.",
     price: 40,
-    image: unsplash("1652283824336-dfcee94dd02b"),
+    image: photo("1652283824336-dfcee94dd02b"),
     demo: true,
   },
   {
@@ -226,7 +226,7 @@ export const menuItems: MenuItem[] = [
     name: "Кофе с собой",
     description: "Американо или капучино в стакане навынос.",
     price: 120,
-    image: unsplash("1647972488473-ca3796499272"),
+    image: photo("1647972488473-ca3796499272"),
     demo: true,
   },
 ];

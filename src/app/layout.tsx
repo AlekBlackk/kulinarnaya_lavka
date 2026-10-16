@@ -35,10 +35,8 @@ export const metadata: Metadata = {
     description: site.description,
     images: [
       {
-        // shortcut: параметры размера понимает только Unsplash; для своего фото подготовьте файл 1200×630
-        url: `${site.heroSlides[0].src}?w=1200&h=630&fit=crop&auto=format&q=75`,
-        width: 1200,
-        height: 630,
+        // shortcut: фото отдаётся целиком, без обрезки под 1200×630; для своего фото подготовьте файл такого размера
+        url: site.heroSlides[0].src, // относительный путь Next дополняет адресом из metadataBase (он уже включает basePath)
         alt: site.heroSlides[0].alt,
       },
     ],
