@@ -18,7 +18,7 @@ export function Hero() {
             Кафе домашней кухни в Тамбове
           </p>
 
-          <h1 className="mt-4 font-display text-[clamp(2.1rem,10.5vw,3rem)] font-bold leading-[1.02] tracking-tight text-coffee sm:text-6xl lg:text-[3.4rem] xl:text-[4.25rem]">
+          <h1 className="mt-4 font-display text-[clamp(2.1rem,10.5vw,3rem)] font-bold leading-[1.1] tracking-tight text-coffee sm:text-6xl lg:text-[3.4rem] xl:text-[4.25rem]">
             <span className="word" style={{ "--i": 0 } as React.CSSProperties}>Вкусные</span>{" "}
             <span className="word relative" style={{ "--i": 1 } as React.CSSProperties}>
               <em className="font-semibold text-terracotta">обеды</em>
@@ -27,7 +27,7 @@ export function Hero() {
                 aria-hidden="true"
                 viewBox="0 0 200 14"
                 preserveAspectRatio="none"
-                className="absolute -bottom-2 left-0 h-3 w-full overflow-visible text-terracotta-soft"
+                className="absolute -bottom-1.5 left-0 h-3 w-full overflow-visible text-terracotta-soft"
               >
                 <path
                   className="scribble"
