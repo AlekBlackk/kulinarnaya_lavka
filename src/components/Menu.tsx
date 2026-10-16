@@ -49,7 +49,7 @@ export function Menu() {
                   aria-hidden="true"
                   viewBox="0 0 120 12"
                   preserveAspectRatio="none"
-                  className="absolute -bottom-3.5 left-0 h-2.5 w-full overflow-visible text-terracotta-soft"
+                  className="absolute -bottom-3 left-0 h-2.5 w-full overflow-visible text-terracotta-soft"
                 >
                   <path
                     className="scribble scribble-view"
