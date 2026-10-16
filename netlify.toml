@@ -1,0 +1,4 @@
+# Сайт собирается как статика (next.config.ts: output "export"), поэтому публикуем папку out/.
+[build]
+  command = "npm run build"
+  publish = "out"
